@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page Not Available</title>
+	<style>
+		body {
+			background-color: orange;
+			font-size: 40px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+		}
+		
+		#cart-icon {
+			font-size: 60px;
+			margin-bottom: 20px;
+		}
+		
+		@keyframes rotate {
+			from { transform: rotate(0deg); }
+			to { transform: rotate(360deg); }
+		}
+		
+		.animated {
+			animation-name: rotate;
+			animation-duration: 1s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+	</style>
+</head>
+<body>
+	<i id="cart-icon" class="fas fa-shopping-cart"></i>
+	<p>Your search is not available at the moment.</p>
+    <p>Please try again later.</p>
+    <script src="https://kit.fontawesome.com/1401ab8939.js" crossorigin="anonymous"></script>
+	<script>
+		document.querySelector('#cart-icon').classList.add('animated');
+	</script>
+</body>
+</html>
