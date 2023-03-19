@@ -9,406 +9,405 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* This is the css for the head section, its sould be the same with all the other html */
-        .navbar{
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
-nav{
-    flex: 1;
-    text-align: right;
-}
-nav ul{
-    display: inline-block;
-    list-style-type: none;
-}
-nav ul li{
-    display: inline-block;
-    margin-right: 20px;
-    color: #555;
-
-}
-a{
-    text-decoration: none;
-    color: #555;
-}
-.container{
-    max-width: 1300px;
-    margin: auto;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-.row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.col-2{
-    flex-basis: 50%;
-    min-width: 300px;
-}
-.col-2 img{
-    max-width: 100%;
-    padding: 50px 0;
-}
-.col-2 h1{
-    font-size: 50px;
-    line-height: 60px;
-    margin: 25px 0;
-}
-.btn{
-    display : inline-block;
-    background: #ff523b;
-    color:#fff;
-    padding: 8px 30px;
-    margin: 30px 0;
-    border-radius: 30px;
-    transition: background 0.5s;
-}
-.btn:hover{
-    background:#563434 ;
-}
-.header{
-    background: radial-gradient(#fff,#ffd6d6);
-}
-.header .row{
-    margin-top: 70px;
-}
-.categories{
-    margin: 70px 0;
-}
-.col-3{
-    flex-basis: 30%;
-    min-width: 250px;
-    margin-bottom: 30px;
-}
-.col-3 img{
-    width: 100%;
-}
-.small-container{
-    max-width: 1080px;
-    margin: auto;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-.col-4{
-    flex-basis: 25%;
-    padding: 10px;
-    min-width: 200px;
-    margin-bottom: 50px;
-    transition: transform 0.5s;
-}
-.col-4 img{
-    width: 100%;
-}
-.title{
-    text-align: center;
-    margin: 0 auto 80px;
-    position: relative;
-    line-height: 60px;
-    color:#555;
-}
-.title::after{
-    content: '';
-    background: #ff523b;
-    width: 80px;
-    height: 5px;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-h4{
-    color: #555;
-    font-weight: normal;
-}
-.col-4 p{
-    font-size: 14px;
-}
-.rating{
-    color:#ff523b;
-}
-.col-4:hover{
-    transform:translateY(-5px);
-}
-        /* This is the css for the about team  */
-        *{
-            margin:0px;
-            padding: 0px;
-            box-sizing: border-box;
-            font-family: 'Lato', sans-serif;
-            /* font-family: 'Josefin Sans', sans-serif; */
-        }
-        .team-section{
-            width: 100%;
-        }
-        .team-section .container{
-            width: 80%;
-            margin: auto;
-        }
-        .team-section .container .row{
-            width: 60%;
-            margin: auto;
-        }
-        .team-section .container .row .title{
-            text-align: center;
-            margin-top: 50px;
-        }
-        .team-section .container .row .title h1{
-            font-size: 35px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #ff523b;
-        }
-        .team-section .container .row .title p{
-            font-size: 18px;
-            font-family: sans-serif;
-            margin: 30px 0px;
-            color: rgb(100, 98, 98);
-        }
-        .team-section .container .team-card{
-            width:100%;
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            grid-gap: 40px;
-            margin-top: 50px;
-        }
-        .team-section .container .team-card .card{
-            width: 100%;
-            background-color: #fafafa;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            cursor: pointer;
-        }
-        .team-section .container .team-card .card:hover{
-            background-color:#f3f3f3;
-            transition: 0.3s;
-        }
-        .team-section .container .team-card .card .image-section img{
-            height: 150px;
-            width: 150px;
-            border-radius: 50%;
-            border: 6px solid #fff;
-        }
-        .team-section .container .team-card .card .content{
-            width: 100%;
-            text-align: center;
-        }
-        .team-section .container .team-card .card .content h3{
-            font-size: 27px;
-            margin-top: 10px;
-            letter-spacing: 1.5px;
-            color: #639ab8;
-        }
-        .team-section .container .team-card .card .content h4{
-            font-size: 17px;
-            margin-top: 10px;
-            letter-spacing: 1.5px;
-            color: #6e6e6e;
-        }
-        .team-section .container .team-card .card .content p{
-            font-size: 15px;
-            margin: 16px 0px;
-            line-height: 1.5;
-            color: #6c6c6c;
-        }
-        @media screen and (max-width: 900px) {
-            .team-section .container .team-card{
-                grid-template-columns: repeat(2,1fr);
-            }
-        }
-        @media screen and (max-width: 768px) {
-            .team-section .container .team-card{
-                grid-template-columns: 1fr;
-            }
-        }
-        /* This is the css for the contact team  part */
-        section{
-            padding: 40px 15%;
-        }
-        .contact{
-            background: #fff;
-            height: 100%;
-            width: 100%;
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: repeat(2 , 2fr);
-            align-items: center;
-            grid-gap: 6rem;
-        }
-        .contact-img img{
-            max-width: 100%;
-            width: 720px;
-            height: auto;
-            border-radius: 10px;
-        }
-        .contact-form h1{
-            font-size: 80px;
-            color: #ff523b;
-            margin-bottom: 20px;
-        }
-        .contact-form p{
-            color: #65697c;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
-            margin-bottom: 3.8rem;
-        }
-        .contact-form form{
-            position: relative;
-        }
-        .contact-form form input, form textarea{
-            width: 100%;
-            padding: 17px;
-            border: none;
-            outline: none;
-            background: #191919;
-            color: #fff;
-            font-size: 1.1rem;
-            margin-bottom: 0.7rem;
-            border-radius: 10px;
-        }
-        .contact-form textarea{
-            resize: none;
-            height: 200px;
-        }
-        .contact-form form .btn{
-            display: inline-block;
-            background: #ff523b;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            width: 220px;
-            transform: ease .20s;
-            cursor: pointer;
-        }
-        .contact-form form .btn:hover{
-            border: 2px solid #ff523b;
-            background: transparent;
-            transform: scale(1.1);
-            color: #191919;
-        }
-        @media(max-width: 1570px){
-            section{
-                padding: 80px 3%;
-                transition: .2s;
-            }
-            .contact-form h1{
-                font-size: 60px;
-            }
-            .contact-form p{
-                margin-bottom: 3rem;
-            }
-        }
-        @media(max-width: 1090px){
-            .contact{
-                grid-gap: 2rem;
-                transition: .3s;
-
-            }
-        }
-        @media(max-width: 1000px){
-            .contact{
-                grid-template-columns: 1fr;
-            }
-            .contact-img img{
-                display: none;
-            }
-        }
-/* -- ------------ footer ----------------- -- */
-
-.footer{
-    background: #000;
-    color: #8a8a8a;
-    font-size: 14px;
-    padding-top: 60px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-}
-.footer p{
-    color: #8a8a8a;
-}
-.footer h3{
-    color:#fff;
-    margin-bottom: 20px;
-}
-.footer-col-1,.footer-col-2,.footer-col-3,.footer-col-4{
-    min-width: 250px;
-    margin-bottom: 20px;
-}
-.footer-col-1{
-    flex-basis: 30%;
-}
-.footer-col-2{
-    flex: 1;
-    text-align: center;
-}
-.footer-col-2 img{
-    width: 180px;
-    margin-bottom: 20px;
-}
-.footer-col-3, .footer-col-4{
-    flex-basis: 12%;
-    text-align: center;
-}
-ul{
-    list-style-type:none;
-}
-.app-logo{
-    margin-top: 20px;
-}
-.app-logo img{
-    width: 140px;
-}
-.footer hr{
-    border: none;
-    background: #b5b5b5;
-    height: 1px;
-    margin: 20px 0;
-}
-.Copyright{
-    text-align: center;
-}
-.menu-icon{
-    width: 28px;
-    margin-left: 20px;
-    display:none;
-}
-/* --------------media query for menu------------- */
-@media only screen and (max-width: 800px){
+<style>
+/* This is the css for the head section, its sould be the same with all the other html */
+    *{
+        margin:0px;
+        padding: 0px;
+        box-sizing: border-box;
+        font-family: 'Lato', sans-serif;
+        /* font-family: 'Josefin Sans', sans-serif; */
+    }
+    .navbar{
+        display: flex;
+        align-items: center;
+        padding: 20px;
+    }
+    nav{
+        flex: 1;
+        text-align: right;
+    }
     nav ul{
-        position: absolute;
-        top: 70px;
-        left: 0;
-        background: #333;
-        width: 100%;
-        overflow: hidden;
-        transition: max-height 0.5s;
+        display: inline-block;
+        list-style-type: none;
     }
     nav ul li{
-        display: block;
-        margin-right:50px;
-        margin-bottom: 10px;
-        margin-top:10px;
+        display: inline-block;
+        margin-right: 20px;
+        color: #555;
+
     }
-    nav ul li a{
-        color: white;
+    a{
+        text-decoration: none;
+        color: #555;
     }
-    .menu-icon{
-        display: block;
+    .container{
+        max-width: 1300px;
+        margin: auto;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .row{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .col-2{
+        flex-basis: 50%;
+        min-width: 300px;
+    }
+    .col-2 img{
+        max-width: 100%;
+        padding: 50px 0;
+    }
+    .col-2 h1{
+        font-size: 50px;
+        line-height: 60px;
+        margin: 25px 0;
+    }
+    .btn{
+        display : inline-block;
+        background: #ff523b;
+        color:#fff;
+        padding: 8px 30px;
+        margin: 30px 0;
+        border-radius: 30px;
+        transition: background 0.5s;
+    }
+    .btn:hover{
+        background:#563434 ;
+    }
+    /* .header{
+        background: radial-gradient(#fff,#ffd6d6);
+    } */
+    .header .row{
+        margin-top: 70px;
+    }
+    .categories{
+        margin: 70px 0;
+    }
+    .col-3{
+        flex-basis: 30%;
+        min-width: 250px;
+        margin-bottom: 30px;
+    }
+    .col-3 img{
+        width: 100%;
+    }
+    .small-container{
+        max-width: 1080px;
+        margin: auto;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    .col-4{
+        flex-basis: 25%;
+        padding: 10px;
+        min-width: 200px;
+        margin-bottom: 50px;
+        transition: transform 0.5s;
+    }
+    .col-4 img{
+        width: 100%;
+    }
+    .title{
+        text-align: center;
+        margin: 0 auto 80px;
+        position: relative;
+        line-height: 60px;
+        color:#555;
+    }
+    .title::after{
+        content: '';
+        background: #ff523b;
+        width: 80px;
+        height: 5px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    h4{
+        color: #555;
+        font-weight: normal;
+    }
+    .col-4 p{
+        font-size: 14px;
+    }
+    .rating{
+        color:#ff523b;
+    }
+    .col-4:hover{
+        transform:translateY(-5px);
+    }
+    /* This is the css for the about team  */
+    .team-section{
+        width: 100%;
+    }
+    .team-section .container{
+        width: 80%;
+        margin: auto;
+    }
+    .team-section .container .row{
+        width: 60%;
+        margin: auto;
+    }
+    .team-section .container .row .title{
+        text-align: center;
+        margin-top: 50px;
+    }
+    .team-section .container .row .title h1{
+        font-size: 35px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #ff523b;
+    }
+    .team-section .container .row .title p{
+        font-size: 18px;
+        font-family: sans-serif;
+        margin: 30px 0px;
+        color: rgb(100, 98, 98);
+    }
+    .team-section .container .team-card{
+        width:100%;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 40px;
+        margin-top: 50px;
+    }
+    .team-section .container .team-card .card{
+        width: 100%;
+        background-color: #fafafa;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
         cursor: pointer;
     }
-}
+    .team-section .container .team-card .card:hover{
+        background-color:#f3f3f3;
+        transition: 0.3s;
+    }
+    .team-section .container .team-card .card .image-section img{
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        border: 6px solid #fff;
+    }
+    .team-section .container .team-card .card .content{
+        width: 100%;
+        text-align: center;
+    }
+    .team-section .container .team-card .card .content h3{
+        font-size: 27px;
+        margin-top: 10px;
+        letter-spacing: 1.5px;
+        color: #639ab8;
+    }
+    .team-section .container .team-card .card .content h4{
+        font-size: 17px;
+        margin-top: 10px;
+        letter-spacing: 1.5px;
+        color: #6e6e6e;
+    }
+    .team-section .container .team-card .card .content p{
+        font-size: 15px;
+        margin: 16px 0px;
+        line-height: 1.5;
+        color: #6c6c6c;
+    }
+    @media screen and (max-width: 900px) {
+        .team-section .container .team-card{
+            grid-template-columns: repeat(2,1fr);
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .team-section .container .team-card{
+            grid-template-columns: 1fr;
+        }
+    }
+    /* This is the css for the contact team  part */
+    section{
+        padding: 40px 15%;
+    }
+    .contact{
+        background: #fff;
+        height: 100%;
+        width: 100%;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: repeat(2 , 2fr);
+        align-items: center;
+        grid-gap: 6rem;
+    }
+    .contact-img img{
+        max-width: 100%;
+        width: 720px;
+        height: auto;
+        border-radius: 10px;
+    }
+    .contact-form h1{
+        font-size: 80px;
+        color: #ff523b;
+        margin-bottom: 20px;
+    }
+    .contact-form p{
+        color: #65697c;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
+        margin-bottom: 3.8rem;
+    }
+    .contact-form form{
+        position: relative;
+    }
+    .contact-form form input, form textarea{
+        width: 100%;
+        padding: 17px;
+        border: none;
+        outline: none;
+        background: #191919;
+        color: #fff;
+        font-size: 1.1rem;
+        margin-bottom: 0.7rem;
+        border-radius: 10px;
+    }
+    .contact-form textarea{
+        resize: none;
+        height: 200px;
+    }
+    .contact-form form .btn{
+        display: inline-block;
+        background: #ff523b;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        width: 220px;
+        transform: ease .20s;
+        cursor: pointer;
+    }
+    .contact-form form .btn:hover{
+        border: 2px solid #ff523b;
+        background: transparent;
+        transform: scale(1.1);
+        color: #191919;
+    }
+    @media(max-width: 1570px){
+        section{
+            padding: 80px 3%;
+            transition: .2s;
+        }
+        .contact-form h1{
+            font-size: 60px;
+        }
+        .contact-form p{
+            margin-bottom: 3rem;
+        }
+    }
+    @media(max-width: 1090px){
+        .contact{
+            grid-gap: 2rem;
+            transition: .3s;
+
+        }
+    }
+    @media(max-width: 1000px){
+        .contact{
+            grid-template-columns: 1fr;
+        }
+        .contact-img img{
+            display: none;
+        }
+    }
+/* -- ------------ footer ----------------- -- */
+    .footer{
+        background: #000;
+        color: #8a8a8a;
+        font-size: 14px;
+        padding-top: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+    }
+    .footer p{
+        color: #8a8a8a;
+    }
+    .footer h3{
+        color:#fff;
+        margin-bottom: 20px;
+    }
+    .footer-col-1,.footer-col-2,.footer-col-3,.footer-col-4{
+        min-width: 250px;
+        margin-bottom: 20px;
+    }
+    .footer-col-1{
+        flex-basis: 30%;
+    }
+    .footer-col-2{
+        flex: 1;
+        text-align: center;
+    }
+    .footer-col-2 img{
+        width: 180px;
+        margin-bottom: 20px;
+    }
+    .footer-col-3, .footer-col-4{
+        flex-basis: 12%;
+        text-align: center;
+    }
+    ul{
+        list-style-type:none;
+    }
+    .app-logo{
+        margin-top: 20px;
+    }
+    .app-logo img{
+        width: 140px;
+    }
+    .footer hr{
+        border: none;
+        background: #b5b5b5;
+        height: 1px;
+        margin: 20px 0;
+    }
+    .Copyright{
+        text-align: center;
+    }
+    .menu-icon{
+        width: 28px;
+        margin-left: 20px;
+        display:none;
+    }
+    /* --------------media query for menu------------- */
+    @media only screen and (max-width: 800px){
+        nav ul{
+            position: absolute;
+            top: 70px;
+            left: 0;
+            background: #333;
+            width: 100%;
+            overflow: hidden;
+            transition: max-height 0.5s;
+        }
+        nav ul li{
+            display: block;
+            margin-right:50px;
+            margin-bottom: 10px;
+            margin-top:10px;
+        }
+        nav ul li a{
+            color: white;
+        }
+        .menu-icon{
+            display: block;
+            cursor: pointer;
+        }
+    }
     </style>
 </head>
 <body>
@@ -416,7 +415,7 @@ ul{
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="./images/logo.png" alt="Logo" width="125px">
+                    <img src="../static/images/logob.png" alt="Logo" width="125px">
                 </div>
                 <nav>
                     <ul id="Menuitems">
@@ -424,22 +423,11 @@ ul{
                         <li><a href="">Products</a></li>
                         <li><a href="">About</a></li>
                         <li><a href="">Contact</a></li>
-                        <li><a href="./signup.html">Account</a></li>
+                        <li><a href="">Account</a></li>
                     </ul>
                 </nav>
-                <img src="./images/cart.png" alt="cart" width="30px" height="30px">
-                <img src="./images/menu.png" class="menu-icon" onclick="menutoggle()">
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <h1>Give your work out <br> A new style!</h1>
-                    <p>Success isn't always about greatness. It's about consistency.
-                        consistent <br> hard work gain sucess. Greatness will come. </p>
-                    <a href="" class="btn">Explore Now &#8594;</a>
-                </div>
-                <div class="col-2">
-                    <img src="./images/image1.png" >
-                </div>
+                <img src="../static/images/cart.png" alt="cart" width="30px" height="30px">
+                <img src="../static/images/menu.png" class="menu-icon" onclick="menutoggle()">
             </div>
         </div>
     </div>
@@ -542,5 +530,19 @@ ul{
          <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
     </div> 
  </div>
+<!-- ------js for toggle menu------- -->
+    <script>
+        var Menuitems = document.getElementById("Menuitems");
+        Menuitems.style.maxHeight = "0px";
+        function menutoggle(){
+            if(Menuitems.style.maxHeight == "0px"){
+                    Menuitems.style.maxHeight="200px";
+                }
+            else
+                {
+                    Menuitems.style.maxHeight = "0px";
+                }
+        }
+    </script>
 </body>
 </html>
