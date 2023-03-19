@@ -16,7 +16,19 @@ import math
 def home(request, *args, **kwargs):
     
     if request.user.username == '':
-        return render(request, 'index.html', {})
+        all_products = Product.objects.all()
+        sbrating = Product.objects.order_by('-rating')[:3]
+        sbsales = Product.objects.order_by('-sales')[:3]
+        sbdate = Product.objects.order_by('-date')[:8]
+        
+        context = {
+            'all_products': all_products,
+            'sbsales': sbsales,
+            'sbrating': sbrating,
+            'sbdate': sbdate,
+        }
+        
+        return render(request, 'index.html', context)
     else:
         current_user = User.objects.get(username=request.user.username)
         
@@ -81,7 +93,28 @@ def logout(request, *args, **kwargs):
 
 @login_required(login_url='auth')
 def cart(request, *args, **kwargs):
-    return render(request, 'cart.html', {})
+    users_cart = Cart.objects.get(user=request.user.username)
+    users_cart_items = Cart_item.objects.filter(user=request.user.username)
+    
+    total_price = 0
+    uci = []
+    
+    for a in users_cart_items:
+        gp = Product.objects.get(name=a.product)
+        uci.append((gp))
+    
+    for i in users_cart_items:
+        get_product = Product.objects.get(name=i.product)
+        total_price += get_product.price
+        
+    context = {
+        'users_cart': users_cart,
+        'users_cart_items': users_cart_items,
+        'total_price': total_price,
+        'uci': uci,
+    }
+    
+    return render(request, 'cart.html', context)
 
 def products(request, pn, *args, **kwargs):
     all_products = Product.objects.all()
@@ -123,64 +156,103 @@ def products(request, pn, *args, **kwargs):
 def productdetails(request, pk, *args, **kwargs):
     
     if request.method == 'POST':
-        rating = request.POST['rating']
-        number = request.POST['number']
-        feedback = request.POST['feedback']
-        
-        product = Product.objects.get(pk=pk)
-        
-        if rating != 'default':
-            new_rating = Rating.objects.create(user=request.user.username, rating=rating, product=product.name)
-        else:
-            new_rating = Rating.objects.create(user=request.user.username, rating=rating, product=product.name)
-        
-        if int(number) > 0:
-            new_number = Number.objects.create(user=request.user.username, number=number, product=product.name)
-        else:
-            messages.info(request, 'The number entered is negative!')
-            return redirect('productdetails')
-        
-        if feedback != '':
-            new_feedback = Feedback.objects.create(user=request.user.username, feedback=feedback, product=product.name)
-        
-        new_rating.save()
-        new_number.save()
-        new_feedback.save()
-        
-        rating_number = Rating.objects.filter(product=product.name).aggregate(Avg('rating'))
-        product.rating = rating_number
-        print(rating_number)
-        
-        number_number = Rating.objects.filter(product=product.name).aggregate(Sum('rating'))
-        product.sales = number_number
-        print(number_number)
-        
-        new_cart_item = Cart_item.objects.create(user=request.user.username, product=product.name)
-        new_cart_item.save()
-        
-        user_cart = Cart.objects.get(user=request.user.username)
-        cil = Cart_item.objects.filter(user=request.user.username)
-        
-        count = 0
-        
-        for i in cil:
-            count += 1
+        if request.user.username != '':
+            if 'rating' in request.POST:
+                rating = request.POST.get('rating')
+
+                product = Product.objects.get(pk=pk)
+                
+                if Rating.objects.filter(user=request.user.username, product=product.name).exists():
+                    r = Rating.objects.get(user=request.user.username, product=product.name)
+                    r.rating = rating
+                    r.save()
+                    
+                    rating_number = Rating.objects.filter(product=product.name).aggregate(Avg('rating'))['rating__avg']
+                    product.rating = rating_number
+                    
+                    product.save()
+                    
+                    return redirect('./' + str(pk))
+                else:
+                    new_rating = Rating.objects.create(user=request.user.username, rating=rating, product=product.name)
+                    new_rating.save()
+                    
+                    rating_number = Rating.objects.filter(product=product.name).aggregate(Avg('rating'))['rating__avg']
+                    product.rating = rating_number
+                    
+                    product.save()
+                    
+                    return redirect('./' + str(pk))
+                
+            elif 'number' in request.POST:
+                number = request.POST['number']
+                feedback = request.POST['feedback']
+                
+                product = Product.objects.get(pk=pk)
+                
+                if int(number) > 0:
+                    new_number = Number.objects.create(user=request.user.username, number=number, product=product.name)
+                else:
+                    messages.info(request, 'The number entered is negative!')
+                    return redirect('productdetails')
+                
+                if feedback != '':
+                    new_feedback = Feedback.objects.create(user=request.user.username, feedback=feedback, product=product.name)
+                    new_feedback.save()
+                    
+                new_number.save()
+                
+                number_number = Number.objects.filter(product=product.name).aggregate(Sum('number'))['number__sum']
+                product.sales = number_number
             
-        user_cart.number = count
-        
-        return redirect('productdetails/' + pk)
-        
+                product.save()
+                
+                new_cart_item = Cart_item.objects.create(user=request.user.username, product=product.name)
+                new_cart_item.save()
+                
+                user_cart = Cart.objects.get(user=request.user.username)
+                cil = Cart_item.objects.filter(user=request.user.username)
+                
+                count = 0
+                
+                for i in cil:
+                    count += 1
+                    
+                user_cart.number = count
+                user_cart.save()
+                
+                return redirect('../productdetails/' + str(pk))
+            else:
+                messages.info(request, 'Please select rating for this product')
+                return redirect('./' + str(pk))
+        else:
+            messages.info(request, 'Login to access these features.')
+            return redirect('auth')
+            
     else:
         product = Product.objects.get(pk=pk)
         related = Product.objects.filter(type=product.type)
         cart_items = Cart_item.objects.filter(user=request.user.username, product=product.name)
+        is_rated = Rating.objects.filter(user=request.user.username, product=product.name)
+        
+        if len(is_rated) == 0:
+            rated = False
+        else:
+            rated = True
         
         if len(cart_items) == 0:
             ici = False
         else:
             ici = True
         
-        return render(request, 'productdetails.html', {'product': product, 'related': related, 'ici': ici})
+        context = {
+            'product': product,
+            'related': related,
+            'ici': ici,
+            'rated': rated,
+        }
+        
+        return render(request, 'productdetails.html', context)
 
 def error(request, *args, **kwargs):
     return render(request, 'error.html', {})
@@ -222,3 +294,15 @@ def productsa(request, pn, type, *args, **kwargs):
     }
     
     return render(request, 'producta.html', context)
+
+def about(request, *args, **kwargs):
+    return render(request, 'about.html', {})
+
+def remove(request, *args, **kwargs):
+    if request.method == 'GET':
+        product = request.GET['product']
+        
+        instance = Cart_item.objects.get(user=request.user.username, product=product)
+        instance.delete()
+        
+        return redirect('cart')

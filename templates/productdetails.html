@@ -55,12 +55,59 @@
                         <img src="{{ product.picture4.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                 </div>
+                    {% if product.rating == 1 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %}
+                   {% if product.rating == 2 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if product.rating == 3 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if product.rating == 4 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if product.rating == 5 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                   {% endif %} 
             </div>
             <div class="col-2">
-                <p><a href="{% url 'home' %}">Home </a> / {{ product.name }}</p>
+                <p><a href="{% url 'home' %}">Home </a> / <a href="{% url 'products' 1 %}">Products</a> / <a href="{% url 'productsa' product.type 1 %}">{{ product.type|title }}</a> / {{ product.name }}</p>
                 <h1> {{ product.name }}</h1>
                 <h4> ₦ {{ product.price }}</h4>
-                <form action="" method="POST" id="addtocart"> {% csrf_token %}
+                
+                <div>
+                    <style>
+                        h5 {
+                            color: red;
+                        }
+                    </style>
+                    {% for message in messages %}
+                      <h5>{{ message }}</h5>
+                    {% endfor %}
+                </div>
+
+                <form action="" method="POST" id="rate"> {% csrf_token %}
                 <select name="rating">
                     <option value="default" selected disabled>Rate this Product</option>
                     <option value="1">1 star</option>
@@ -69,6 +116,53 @@
                     <option value="4">4 stars</option>
                     <option value="5">5 stars</option>
                 </select><br>
+                
+                {% if rated %}
+                    <p>Your rating: 
+                        {% if product.rating == 1 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %}
+                       {% if product.rating == 2 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if product.rating == 3 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if product.rating == 4 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if product.rating == 5 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                       {% endif %} 
+                        </i></p>
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Edit Rating </button><br>
+                {% else %}
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Submit Rating </button><br>
+                {% endif %}
+                
+                </form>
+                
+                <form action="" method="POST" id="addtocart"> {% csrf_token %}
                 <input type="number" min="1" name="number" value="1"> <br><br>
                 <textarea name="feedback" style="width: 80%; height: 150px;" placeholder="Tell us what you think about this Product."></textarea><br>
                 {% if ici %}

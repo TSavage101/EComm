@@ -17,13 +17,13 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href="{% url 'home' %}"><img src="{% static './images/logo.png' %}" alt="Logo" width="125px"></a>
+                <a href="{% url 'home' %}"><img src="{% static './images/logob.png' %}" alt="Logo" width="200px"></a>
             </div>
             <nav>
                 <ul id="Menuitems">
                     <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="">Products</a></li>
-                    <li><a href="">About</a></li>
+                    <li><a href="{% url 'products' 1 %}">Products</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="">Contact</a></li>
                     <li><a href="{% url 'logout' %}">{{ request.user.username }}</a></li>
                 </ul>
@@ -36,72 +36,42 @@
 
 <!-- ------------ Cart Items Details ----------------- -->
     <div class="small-container cart-page">
+        {% if uci|length == 0 %}
+        <p style="margin: 0px 0px 40% 0px; text-align:center;">You have no products in your cart.</p>
+        {% else %}
         <table>
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+            {% for item in uci %}
             <tr>
                 <td>
                     <div class="cart-info">
-                        <img src="{% static './images/buy-1.jpg' %}">
+                        <a href="{% url 'productdetails' item.pk %}"><img src="{{ item.picture1.url }}"></a>
                         <div>
-                            <p>Printed T-shirt</p>
-                            <small>Price :$50.00</small><br>
-                            <a href="">Remove</a>
+                            <p><a style="font-size: large;" href="{% url 'productdetails' item.pk %}">{{ item.name }}</a></p>
+                            <small>Price :₦ {{ item.price }}</small><br>
+                            <a href="/remove?product={{ item.name }}">Remove</a>
                         </div>
                     </div>
                 </td>
                 <td><input type="number" value="1"></td>
-                <td>$50.00</td>
+                <td>₦ {{ item.price }}</td>
             </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="{% static './images/buy-2.jpg' %}">
-                        <div>
-                            <p>Printed T-shirt</p>
-                            <small>Price :$30.00</small><br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="{% static './images/buy-3.jpg' %}">
-                        <div>
-                            <p>Printed T-shirt</p>
-                            <small>Price :$20.00</small><br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
+            {% endfor %}
         </table>
         <div class="total-price">
             <table>
                 <tr>
-                    <td>Subtotal</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Tax</td>
-                    <td>$35.00</td>
-                </tr>
-                <tr>
-                    <td>Subtotal</td>
-                    <td>$230.00</td>
+                    <td>Total</td>
+                    <td>₦ {{ total_price }}</td>
                 </tr>
             </table>
         </div>
     </div>
+    {% endif %}
 <!-- ------------ footer ----------------- -->
     <div class="footer">
        <div class="cointainer">
