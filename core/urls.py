@@ -7,6 +7,8 @@ urlpatterns = [
     path('auth/', views.authe, name='auth'),
     path('logout/', views.logout, name='logout'),
     path('cart/', views.cart, name='cart'),
-    path('product/', views.home, name='product'),
-    path('productdetails', views.home, name='productd'),
+    path('products/page<int:pn>', views.products, name='products'),
+    path('products/<str:type>/<int:pn>', views.productsa, name='productsa'),
+    path('productdetails/<int:pk>', views.productdetails, name='productdetails'),
+    path('error/', views.error, name='error'),
 ]

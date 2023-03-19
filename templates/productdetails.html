@@ -1,71 +1,92 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{% static './style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title> All Product | Pick Me Up Shine On </title>
+    <title> All Product | Hebron Stores </title>
 </head>
 <body>
     
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <img src="./images/logo.png" alt="Logo" width="125px">
+                <a href="{% url 'home' %}"><img src="{% static './images/logob.png' %}" alt="Logo" width="200px"></a>
             </div>
             <nav>
                 <ul id="Menuitems">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Products</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'products' 1 %}">Products</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">Contact</a></li>
-                    <li><a href="">Account</a></li>
+                    {% if request.user.username %}
+                    <li><a href="{% url 'logout' %}">{{ request.user.username }}</a></li>
+                    {% else %}
+                    <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}
                 </ul>
             </nav>
-            <img src="./images/cart.png" alt="cart" width="30px" height="30px">
-            <img src="./images/menu.png" class="menu-icon" onclick="menutoggle()">
+            <a href="{% url 'cart' %}"><img src="{%     static './images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
+            <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
  <!-- ------------ Single Product Details------------ --> 
     <div class="small-container single-product">
         <div class="row">
             <div class="col-2">
-                <img src="./images/gallery-1.jpg" width="100%" id="productImg">
+                <img src="{{ product.picture1.url }}" width="100%" style="height: 520px;" id="productImg">
                 <div class="small-img-row">
                     <div class="small-img-col">
-                        <img src="./images/gallery-1.jpg" width="100%" class="smallImg">
+                        <img src="{{ product.picture1.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                     <div class="small-img-col">
-                        <img src="./images/gallery-2.jpg" width="100%" class="smallImg">
+                        <img src="{{ product.picture2.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                     <div class="small-img-col">
-                        <img src="./images/gallery-3.jpg" width="100%" class="smallImg">
+                        <img src="{{ product.picture3.url }}" width="100%" style="height: 120px;"  class="smallImg">
                     </div>
                     <div class="small-img-col">
-                        <img src="./images/gallery-4.jpg" width="100%" class="smallImg">
+                        <img src="{{ product.picture4.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                 </div>
             </div>
             <div class="col-2">
-                <p>Home / T-Shirt</p>
-                <h1> Red Printed T-shirt by HRX</h1>
-                <h4> $50.00</h4>
-                <select>
-                    <option>Select Size</option>
-                    <option>Small</option>
-                    <option>Large</option>
-                    <option>XL</option>
-                </select>
-                <input type="number" value="1">
-                <a href="" class="btn">Add To cart</a>
+                <p><a href="{% url 'home' %}">Home </a> / {{ product.name }}</p>
+                <h1> {{ product.name }}</h1>
+                <h4> ₦ {{ product.price }}</h4>
+                <form action="" method="POST" id="addtocart"> {% csrf_token %}
+                <select name="rating">
+                    <option value="default" selected disabled>Rate this Product</option>
+                    <option value="1">1 star</option>
+                    <option value="2">2 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="5">5 stars</option>
+                </select><br>
+                <input type="number" min="1" name="number" value="1"> <br><br>
+                <textarea name="feedback" style="width: 80%; height: 150px;" placeholder="Tell us what you think about this Product."></textarea><br>
+                {% if ici %}
+                  <button disabled class="btn" style="border: 1px solid black; background: grey;"> Added To cart </button>
+                {% else %}
+                  <button type="submit" class="btn" style="border: 1px solid black;"> Add To cart </button>
+                {% endif %}
+                
+                </form>
                 <h3> Product Details <i class="fa fa-indent"></i> </h3>
                 <br>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit vel id fugiat aliquid incidunt itaque. Molestiae unde exercitationem, hic veritatis, accusantium suscipit nihil ullam magni omnis optio, doloribus molestias consequuntur?</p>
+                <p>
+                    <b>{{ product.seller }}</b> <br>
+                    Email: {{ product.seller_email }} <br>
+                    Telegram Number: {{ product.seller_telegram_number }} <br>
+                    Whatsapp Number: {{ product.seller_whatsapp_number }} <br> <br>
+                    {{ product.details }}
+                </p>
             </div>
         </div>
     </div>
@@ -73,60 +94,61 @@
     <div class="small-container">
         <div class="row row-2">
             <h2> Related Products</h2>
-            <p>View more</p>
+            <p><a href="{% url 'productsa' product.type 1 %}">View more</a></p>
         </div>
     </div>
     <!-- ----------------- Products--------------- -->
     <div class="small-container">
         <div class="row">
-            <div class="col-4">
-                <img src="./images/product-9.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
+            {% for item in related %}
+              {% if item.name != product.name %}
+              <div class="col-4">
+                <a href="{% url 'productdetails' item.pk %}">
+                <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
+                    <h4>{{ item.name }}</h4>
+                    <div class="rating">
+                       {% if item.rating == 1 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %}
+                       {% if item.rating == 2 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if item.rating == 3 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if item.rating == 4 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if item.rating == 5 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                       {% endif %} 
+                    </div>
+                    
+                    <p>₦ {{ item.price }}</p>
+                    </a>
                 </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="./images/product-10.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="./images/product-11.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-half-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="./images/product-12.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
+              {% endif %}
+            {% endfor %}
         </div> 
     </div>
     
@@ -139,12 +161,12 @@
                     <h3> Download our App</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     <div class="app-logo">
-                        <img src="./images/play-store.png" >
-                        <img src="./images/app-store.png" >
+                        <img src="{% static './images/play-store.png' %}" >
+                        <img src="{% static './images/app-store.png' %}" >
                     </div>    
                 </div>
                 <div class="footer-col-2">
-                    <img src="./images/logo-white.png" >
+                    <img src="{% static './images/logo-white.png' %}" >
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
                 </div>
                 <div class="footer-col-3">

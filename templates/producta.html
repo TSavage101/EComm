@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title> All Product | Hebron Stores </title>
+    <title> {{ type | title }} | Hebron Stores </title>
 </head>
 <body>
     
@@ -39,7 +39,7 @@
 
     <div class="small-container">
         <div class="row row-2">
-            <h2>All Products</h2>
+            <h2>All {{ type | title }}</h2>
             <form action="" method="POST"> {% csrf_token %}
             <select name="order" onchange='this.form.submit()'>
                 <option value="Default" selected disabled>Sort by {{ value }}</option>
@@ -105,7 +105,7 @@
         <div>
             <div class="page-btn">
                 {% for p in plist  %}
-                <span><a href="{% url 'products' p %}">{{ p }}</a></span>
+                <span><a href="{% url 'productsa' type p %}">{{ p }}</a></span>
                 {% endfor %}
                 
                 <span>&#8594;</span>

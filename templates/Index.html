@@ -10,19 +10,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Pick Me Up Shine On | E-commerce Website Design</title>
+    <title>Hebron Stores | E-commerce Website</title>
 </head>
 <body>
     <div class="header">
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="{% static 'images/logo.png' %}" alt="Logo" width="125px">
+                    <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo" width="200px"></a>
                 </div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="">Home</a></li>
-                        <li><a href="">Products</a></li>
+                        <li><a href="{% url 'products' 1 %}">Products</a></li>
                         <li><a href="">About</a></li>
                         <li><a href="">Contact</a></li>
                         {% if current_user %}
@@ -37,10 +37,9 @@
             </div>
             <div class="row">
                 <div class="col-2">
-                    <h1>Give your work out <br> A new style!</h1>
-                    <p>Success isn't always about greatness. It's about consistency.
-                        consistent <br> hard work gain sucess. Greatness will come. </p>
-                    <a href="" class="btn">Explore Now &#8594;</a>
+                    <h1>Elevate your style <br> with our trendstting products.</h1>
+                    <p>Up your game fashion game today. <br> It's all about your style.</p>
+                    <a href="{% url 'productsa' 'clothes' 1 %}" class="btn">Shop Now &#8594;</a>
                 </div>
                 <div class="col-2">
                     <img src="{% static './images/image1.png' %}" >
@@ -52,15 +51,13 @@
     <div class="categories">
         <div class="small-container">
             <div class="row">
-                <div class="col-3">
-                    <img src="{% static './images/category-1.jpg' %}">
-                </div>
-                <div class="col-3">
-                    <img src="{% static './images/category-2.jpg' %}">
-                </div>
-                <div class="col-3">
-                    <img src="{% static './images/category-3.jpg' %}">
-                </div>
+                {% for prod in sbrating %}
+                    <div class="col-3">
+                        <a href="{% url 'productdetails' prod.pk %}">
+                            <img src="{{ prod.picture1.url }}" alt="{{ prod.name }}">
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -68,155 +65,106 @@
     <div class="small-container">
         <h2 class="title">Featured Products</h2>
         <div class="row">
+            {% for item in sbsales %}
+              
             <div class="col-4">
-                <img src="{% static './images/product-1.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
+            <a href="{% url 'productdetails' item.pk %}">
+            <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
+                <h4>{{ item.name }}</h4>
                 <div class="rating">
+                   {% if item.rating == 1 %}
                     <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %}
+                   {% if item.rating == 2 %}
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-2.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-3.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-half-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-4.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if item.rating == 3 %}
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star-o" ></i>
                     <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if item.rating == 4 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if item.rating == 5 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                   {% endif %} 
                 </div>
-                <p>$50.00</p>
+                
+                <p>₦ {{ item.price }}</p>
+                </a>
             </div>
+            {% endfor %}
         </div>
         <h2 class="title">Latest Products</h2> 
         <div class="row">
+            {% for item in sbdate %}
+              
             <div class="col-4">
-                <img src="{% static './images/product-5.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
+            <a href="{% url 'productdetails' item.pk %}">
+            <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
+                <h4>{{ item.name }}</h4>
                 <div class="rating">
+                   {% if item.rating == 1 %}
                     <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %}
+                   {% if item.rating == 2 %}
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-6.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-7.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-half-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-8.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
+                    <i class="fa fa-star-o" ></i>
+                    <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if item.rating == 3 %}
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star-o" ></i>
                     <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <img src="{% static './images/product-9.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
+                   {% endif %} 
+                   {% if item.rating == 4 %}
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star" ></i>
                     <i class="fa fa-star-o" ></i>
+                   {% endif %} 
+                   {% if item.rating == 5 %}
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                    <i class="fa fa-star" ></i>
+                   {% endif %} 
                 </div>
-                <p>$50.00</p>
+                
+                <p>₦ {{ item.price }}</p>
+                </a>
             </div>
-            <div class="col-4">
-                <img src="{% static './images/product-10.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-11.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-half-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static './images/product-12.jpg' %}">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
+
+            {% endfor %}
         </div>
     </div>
     <!-- -----Offer----- -->
@@ -227,11 +175,15 @@
                     <img src="{% static './images/exclusive.png' %}" class="offer-img">
                 </div>
                 <div class="col-2">
-                    <p>Excusively Available on RedStore </p>
+                    <p>Exclusively Available on Hebron Stores. </p>
                     <h1>Smart Band 4</h1>
-                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus possimus deleniti tempora ratione, consequatur nostrum ea culpa voluptates commodi illo praesentium aliquid quasi aspernatur est omnis iusto facilis totam sunt? </small>
+                    {% for p in all_products %}
+                      {% if p.name == "Smart Band 4" %}
+                      <small> {{ p.details }} </small>
+                      <a href="{% url 'productdetails' p.pk %}" class="btn">Buy Now &#8594;</a>
+                      {% endif %}
+                    {% endfor %}
                     <br>
-                    <a href="" class="btn">Buy Now &#8594;</a>
                 </div>
             </div>
         </div>
@@ -340,7 +292,7 @@
                 </div>
             </div>
             <hr>
-            <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
+            <p class="Copyright">Copyright 2022 - Bayode's Web Dev</p>
        </div> 
     </div>
 <!-- ------js for toggle menu------- -->
