@@ -11,7 +11,130 @@
     
     <style>
         /* This is the css for the head section, its sould be the same with all the other html */
-        
+        .navbar{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+    display: inline-block;
+    list-style-type: none;
+}
+nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+    color: #555;
+
+}
+a{
+    text-decoration: none;
+    color: #555;
+}
+.container{
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+.col-2 img{
+    max-width: 100%;
+    padding: 50px 0;
+}
+.col-2 h1{
+    font-size: 50px;
+    line-height: 60px;
+    margin: 25px 0;
+}
+.btn{
+    display : inline-block;
+    background: #ff523b;
+    color:#fff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+.btn:hover{
+    background:#563434 ;
+}
+.header{
+    background: radial-gradient(#fff,#ffd6d6);
+}
+.header .row{
+    margin-top: 70px;
+}
+.categories{
+    margin: 70px 0;
+}
+.col-3{
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+.col-3 img{
+    width: 100%;
+}
+.small-container{
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.col-4{
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+}
+.col-4 img{
+    width: 100%;
+}
+.title{
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color:#555;
+}
+.title::after{
+    content: '';
+    background: #ff523b;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+h4{
+    color: #555;
+    font-weight: normal;
+}
+.col-4 p{
+    font-size: 14px;
+}
+.rating{
+    color:#ff523b;
+}
+.col-4:hover{
+    transform:translateY(-5px);
+}
         /* This is the css for the about team  */
         *{
             margin:0px;
@@ -201,7 +324,7 @@
                 display: none;
             }
         }
-        /* -- ------------ footer ----------------- -- */
+/* -- ------------ footer ----------------- -- */
 
 .footer{
     background: #000;
@@ -261,9 +384,65 @@ ul{
     margin-left: 20px;
     display:none;
 }
+/* --------------media query for menu------------- */
+@media only screen and (max-width: 800px){
+    nav ul{
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #333;
+        width: 100%;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+    nav ul li{
+        display: block;
+        margin-right:50px;
+        margin-bottom: 10px;
+        margin-top:10px;
+    }
+    nav ul li a{
+        color: white;
+    }
+    .menu-icon{
+        display: block;
+        cursor: pointer;
+    }
+}
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="./images/logo.png" alt="Logo" width="125px">
+                </div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Products</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="./signup.html">Account</a></li>
+                    </ul>
+                </nav>
+                <img src="./images/cart.png" alt="cart" width="30px" height="30px">
+                <img src="./images/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <h1>Give your work out <br> A new style!</h1>
+                    <p>Success isn't always about greatness. It's about consistency.
+                        consistent <br> hard work gain sucess. Greatness will come. </p>
+                    <a href="" class="btn">Explore Now &#8594;</a>
+                </div>
+                <div class="col-2">
+                    <img src="./images/image1.png" >
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="team-section">
         <div class="container">
             <div class="row">
@@ -324,44 +503,44 @@ ul{
             <img src="../static/images/459-background.png" alt="">
         </div>
     </section>
-    <!-- ------------ footer ----------------- -->
-    <div class="footer">
-        <div class="cointainer">
-             <div class="row">
-                 <div class="footer-col-1">
-                     <h3> Download our App</h3>
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                     <div class="app-logo">
-                         <img src="{% static './images/play-store.png' %}" >
-                         <img src="{% static './images/app-store.png' %}" >
-                     </div>    
-                 </div>
-                 <div class="footer-col-2">
-                     <img src="{% static './images/logo-white.png' %}" >
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
-                 </div>
-                 <div class="footer-col-3">
-                     <h3> Useful Links</h3>
-                     <ul>
-                         <li>Coupons</li>
-                         <li>Blog Post</li>
-                         <li>Return Policy</li>
-                         <li>Join Affliate</li>
-                     </ul>
-                 </div>
-                 <div class="footer-col-4">
-                     <h3> Follow Us</h3>
-                     <ul>
-                         <li>Facebook</li>
-                         <li>Twitter</li>
-                         <li>Instagram</li>
-                         <li>Youtube</li>
-                     </ul>
-                 </div>
+<!-- ------------ footer ----------------- -->
+<div class="footer">
+    <div class="cointainer">
+         <div class="row">
+             <div class="footer-col-1">
+                 <h3> Download our App</h3>
+                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                 <div class="app-logo">
+                     <img src="./images/play-store.png" >
+                     <img src="./images/app-store.png" >
+                 </div>    
              </div>
-             <hr>
-             <p class="Copyright">Copyright 2022 - Ayokunle</p>
-        </div> 
-     </div>
+             <div class="footer-col-2">
+                 <img src="../static/images/logo-white.png" >
+                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
+             </div>
+             <div class="footer-col-3">
+                 <h3> Useful Links</h3>
+                 <ul>
+                     <li>Coupons</li>
+                     <li>Blog Post</li>
+                     <li>Return Policy</li>
+                     <li>Join Affliate</li>
+                 </ul>
+             </div>
+             <div class="footer-col-4">
+                 <h3> Follow Us</h3>
+                 <ul>
+                     <li>Facebook</li>
+                     <li>Twitter</li>
+                     <li>Instagram</li>
+                     <li>Youtube</li>
+                 </ul>
+             </div>
+         </div>
+         <hr>
+         <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
+    </div> 
+ </div>
 </body>
 </html>
