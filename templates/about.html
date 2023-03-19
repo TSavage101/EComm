@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* This is the css for the head section, its sould be the same with all the other html */
+        
+        /* This is the css for the about team  */
         *{
             margin:0px;
             padding: 0px;
@@ -103,6 +106,7 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* This is the css for the contact team  part */
         section{
             padding: 40px 15%;
         }
@@ -197,6 +201,66 @@
                 display: none;
             }
         }
+        /* -- ------------ footer ----------------- -- */
+
+.footer{
+    background: #000;
+    color: #8a8a8a;
+    font-size: 14px;
+    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+.footer p{
+    color: #8a8a8a;
+}
+.footer h3{
+    color:#fff;
+    margin-bottom: 20px;
+}
+.footer-col-1,.footer-col-2,.footer-col-3,.footer-col-4{
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+.footer-col-1{
+    flex-basis: 30%;
+}
+.footer-col-2{
+    flex: 1;
+    text-align: center;
+}
+.footer-col-2 img{
+    width: 180px;
+    margin-bottom: 20px;
+}
+.footer-col-3, .footer-col-4{
+    flex-basis: 12%;
+    text-align: center;
+}
+ul{
+    list-style-type:none;
+}
+.app-logo{
+    margin-top: 20px;
+}
+.app-logo img{
+    width: 140px;
+}
+.footer hr{
+    border: none;
+    background: #b5b5b5;
+    height: 1px;
+    margin: 20px 0;
+}
+.Copyright{
+    text-align: center;
+}
+.menu-icon{
+    width: 28px;
+    margin-left: 20px;
+    display:none;
+}
     </style>
 </head>
 <body>
@@ -260,5 +324,44 @@
             <img src="../static/images/459-background.png" alt="">
         </div>
     </section>
+    <!-- ------------ footer ----------------- -->
+    <div class="footer">
+        <div class="cointainer">
+             <div class="row">
+                 <div class="footer-col-1">
+                     <h3> Download our App</h3>
+                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                     <div class="app-logo">
+                         <img src="{% static './images/play-store.png' %}" >
+                         <img src="{% static './images/app-store.png' %}" >
+                     </div>    
+                 </div>
+                 <div class="footer-col-2">
+                     <img src="{% static './images/logo-white.png' %}" >
+                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
+                 </div>
+                 <div class="footer-col-3">
+                     <h3> Useful Links</h3>
+                     <ul>
+                         <li>Coupons</li>
+                         <li>Blog Post</li>
+                         <li>Return Policy</li>
+                         <li>Join Affliate</li>
+                     </ul>
+                 </div>
+                 <div class="footer-col-4">
+                     <h3> Follow Us</h3>
+                     <ul>
+                         <li>Facebook</li>
+                         <li>Twitter</li>
+                         <li>Instagram</li>
+                         <li>Youtube</li>
+                     </ul>
+                 </div>
+             </div>
+             <hr>
+             <p class="Copyright">Copyright 2022 - Ayokunle</p>
+        </div> 
+     </div>
 </body>
 </html>
