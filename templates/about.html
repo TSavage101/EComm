@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Team Section</title>
+    <title>Contact Page || The Team Section</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         *{
             margin:0px;
             padding: 0px;
             box-sizing: border-box;
             font-family: 'Lato', sans-serif;
+            /* font-family: 'Josefin Sans', sans-serif; */
         }
         .team-section{
             width: 100%;
@@ -98,6 +103,100 @@
                 grid-template-columns: 1fr;
             }
         }
+        section{
+            padding: 40px 15%;
+        }
+        .contact{
+            background: #fff;
+            height: 100%;
+            width: 100%;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(2 , 2fr);
+            align-items: center;
+            grid-gap: 6rem;
+        }
+        .contact-img img{
+            max-width: 100%;
+            width: 720px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .contact-form h1{
+            font-size: 80px;
+            color: #ff523b;
+            margin-bottom: 20px;
+        }
+        .contact-form p{
+            color: #65697c;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            margin-bottom: 3.8rem;
+        }
+        .contact-form form{
+            position: relative;
+        }
+        .contact-form form input, form textarea{
+            width: 100%;
+            padding: 17px;
+            border: none;
+            outline: none;
+            background: #191919;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 0.7rem;
+            border-radius: 10px;
+        }
+        .contact-form textarea{
+            resize: none;
+            height: 200px;
+        }
+        .contact-form form .btn{
+            display: inline-block;
+            background: #ff523b;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            width: 220px;
+            transform: ease .20s;
+            cursor: pointer;
+        }
+        .contact-form form .btn:hover{
+            border: 2px solid #ff523b;
+            background: transparent;
+            transform: scale(1.1);
+            color: #191919;
+        }
+        @media(max-width: 1570px){
+            section{
+                padding: 80px 3%;
+                transition: .2s;
+            }
+            .contact-form h1{
+                font-size: 60px;
+            }
+            .contact-form p{
+                margin-bottom: 3rem;
+            }
+        }
+        @media(max-width: 1090px){
+            .contact{
+                grid-gap: 2rem;
+                transition: .3s;
+
+            }
+        }
+        @media(max-width: 1000px){
+            .contact{
+                grid-template-columns: 1fr;
+            }
+            .contact-img img{
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -106,7 +205,7 @@
             <div class="row">
                 <div class="title">
                     <h1>Our team </h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    <p>This skilled team of web developers collaborates to craft innovative digital solutions, delivering exceptional user experiences and impactful online presence </p>
                 </div>
             </div>
                 <div class="team-card">
@@ -117,7 +216,7 @@
                         <div class="content">
                             <h3>Ositade Ayokunle</h3>
                             <h4>Web Developer</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                            <p>Innovative and skilled web developer creating functional websites.</p>
                         </div>
                     </div>
                     <div class="card">
@@ -127,7 +226,7 @@
                         <div class="content">
                             <h3>Bayode Iretoomiwa</h3>
                             <h4>Web Developer</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                            <p>Crafting digital experiences through coding and creativity. </p>
                         </div>
                     </div>
                     <div class="card">
@@ -137,11 +236,29 @@
                         <div class="content">
                             <h3>Omaga David Owoichio</h3>
                             <h4>Web Designer</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                            <p>This web designer crafts visually appealing and user-friendly websites. </p>
                         </div>
                     </div>
                 </div>
         </div>
     </div>
+    <section class="contact">
+        <div class="contact-form">
+            <h1>Contact <span>Us</span></h1>
+            <p>Leave your complain, comment and contributions here we would happy to help and would get back to you in less than 48hr.</p>
+            <form action="">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="E-Mail" required>
+                <input type="text" placeholder="Write your Subject." required>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" required>
+
+                </textarea>
+                <input type="submit" name="" value="Submit" class="btn">
+            </form>
+        </div>
+        <div class="contact-img">
+            <img src="../static/images/459-background.png" alt="">
+        </div>
+    </section>
 </body>
 </html>
