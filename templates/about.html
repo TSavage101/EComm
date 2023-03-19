@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Team Section</title>
+    <style>
+        *{
+            margin:0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+        }
+        .team-section{
+            width: 100%;
+        }
+        .team-section .container{
+            width: 80%;
+            margin: auto;
+        }
+        .team-section .container .row{
+            width: 60%;
+            margin: auto;
+        }
+        .team-section .container .row .title{
+            text-align: center;
+            margin-top: 50px;
+        }
+        .team-section .container .row .title h1{
+            font-size: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #ff523b;
+        }
+        .team-section .container .row .title p{
+            font-size: 18px;
+            font-family: sans-serif;
+            margin: 30px 0px;
+            color: rgb(100, 98, 98);
+        }
+        .team-section .container .team-card{
+            width:100%;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-gap: 40px;
+            margin-top: 50px;
+        }
+        .team-section .container .team-card .card{
+            width: 100%;
+            background-color: #fafafa;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .team-section .container .team-card .card:hover{
+            background-color:#f3f3f3;
+            transition: 0.3s;
+        }
+        .team-section .container .team-card .card .image-section img{
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+        }
+        .team-section .container .team-card .card .content{
+            width: 100%;
+            text-align: center;
+        }
+        .team-section .container .team-card .card .content h3{
+            font-size: 27px;
+            margin-top: 10px;
+            letter-spacing: 1.5px;
+            color: #639ab8;
+        }
+        .team-section .container .team-card .card .content h4{
+            font-size: 17px;
+            margin-top: 10px;
+            letter-spacing: 1.5px;
+            color: #6e6e6e;
+        }
+        .team-section .container .team-card .card .content p{
+            font-size: 15px;
+            margin: 16px 0px;
+            line-height: 1.5;
+            color: #6c6c6c;
+        }
+        @media screen and (max-width: 900px) {
+            .team-section .container .team-card{
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .team-section .container .team-card{
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="team-section">
+        <div class="container">
+            <div class="row">
+                <div class="title">
+                    <h1>Our team </h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                </div>
+            </div>
+                <div class="team-card">
+                    <div class="card">
+                        <div class="image-section">
+                            <img src="../static/images/product-1.jpg" alt="Picture of Ayokunle">
+                        </div>
+                        <div class="content">
+                            <h3>Ositade Ayokunle</h3>
+                            <h4>Web Developer</h4>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="image-section">
+                            <img src="../static/images/product-2.jpg" alt="Picture of Bayode">
+                        </div>
+                        <div class="content">
+                            <h3>Bayode Iretoomiwa</h3>
+                            <h4>Web Developer</h4>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="image-section">
+                            <img src="../static/images/product-3.jpg" alt="Picture of Omaga">
+                        </div>
+                        <div class="content">
+                            <h3>Omaga David Owoichio</h3>
+                            <h4>Web Designer</h4>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
