@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Team Section</title>
+    <link rel="stylesheet" href="{% static './style.css' %}">
     <style>
         *{
             margin:0px;
@@ -102,6 +103,28 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo" width="200px"></a>
+            </div>
+            <nav>
+                <ul id="Menuitems">
+                    <li><a href="">Home</a></li>
+                    <li><a href="{% url 'products' 1 %}">Products</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    {% if current_user %}
+                        <li><a href="{% url 'logout' %}"> {{ current_user.username }}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}   
+                </ul>
+            </nav>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
+            <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+
     <div class="team-section">
         <div class="container">
             <div class="row">
@@ -144,6 +167,7 @@
                 </div>
         </div>
     </div>
+    
     <section class="contact">
         <div class="contact-form">
             <h1>Contact <span>Us</span></h1>
@@ -162,6 +186,7 @@
             <img src="../static/images/459-background.png" alt="">
         </div>
     </section>
+
 <!-- ------------ footer ----------------- -->
 <div class="footer">
     <div class="cointainer">
