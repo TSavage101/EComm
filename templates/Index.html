@@ -14,10 +14,30 @@
 </head>
 <body>
     <div class="header">
-        <div class="container">
-            <div class="navbar">
+        <div class="container" style="padding: 0px;">
+            <div class="navbar" style="padding: 0px;">
                 <div class="logo">
                     <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo" width="200px"></a>
+                </div>
+                <div style="width: 40%; margin: 0 1%;">
+                    <input type="search" name="search" style="
+                    width: 85%;
+                    height: 30px;
+                    border-right: none;
+                    border-radius: 20px 0px 0px 20px;
+                    background: rgb(224, 221, 221);
+                    color: #49201b
+                    " />
+                    <button type="submit" style="
+                    width: 15%;
+                    float: right;
+                    height: 30px;
+                    border-left: none;
+                    border-radius: 0px 20px 20px 0px;
+                    background: rgb(224, 221, 221);
+                    color: #49201b;
+                    font-size: 18px;
+                    "><i class="fa fa-search"></i></button>
                 </div>
                 <nav>
                     <ul id="Menuitems">
