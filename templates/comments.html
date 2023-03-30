@@ -1,12 +1,11 @@
 {% load static %}
-{% load  %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static './style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -83,98 +82,101 @@
             <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
         </div>
-    
 
-<!-- ------------ Cart Items Details ----------------- -->
-    <div class="small-container cart-page">
-        {% if uci|length == 0 %}
-        <p style="margin: 0px 0px 40% 0px; text-align:center;">You have no products in your cart.</p>
-        {% else %}
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>Commission</th>
-                <th>Subtotal</th>
-            </tr>
-            {% for item in uci %}
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <a href="{% url 'productdetails' item.pk %}"><img src="{{ item.picture1.url }}"></a>
-                        <div>
-                            <p><a style="font-size: large;" href="{% url 'productdetails' item.pk %}">{{ item.name }}</a></p>
-                            <small>Price :₦ {{ item.price }}</small><br>
-                            <a href="/remove?product={{ item.name }}">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td>₦ {{ commission}}</td> 
-                <td>₦ {{ item.price }} + {{ commission }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <div class="total-price">
-            <table>
-                <tr>
-                    <td>Total</td>
-                    <td>₦ {{ total_price }}</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    {% endif %}
-<!-- ------------ footer ----------------- -->
-    <div class="footer">
-       <div class="cointainer">
-            <div class="row">
-                <div class="footer-col-1">
-                    <h3> Download our App</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <div class="app-logo">
-                        <img src="{% static './images/play-store.png' %}" >
-                        <img src="{% static './images/app-store.png' %}" >
-                    </div>    
-                </div>
-                <div class="footer-col-2">
-                    <img src="{% static './images/logo-white.png' %}" >
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
-                </div>
-                <div class="footer-col-3">
-                    <h3> Useful Links</h3>
-                    <ul>
-                        <li>Coupons</li>
-                        <li>Blog Post</li>
-                        <li>Return Policy</li>
-                        <li>Join Affliate</li>
-                    </ul>
-                </div>
-                <div class="footer-col-4">
-                    <h3> Follow Us</h3>
-                    <ul>
-                        <li>Facebook</li>
-                        <li>Twitter</li>
-                        <li>Instagram</li>
-                        <li>Youtube</li>
-                    </ul>
-                </div>
+
+<p style="margin: 10px 0px 0px 50px; font-size:large;"><a href="{% url 'productdetails' prodid %}" style="color: #ff523b;">&#8592; Back</a></p>
+<h1 class="title">Comments</h1>
+{% if feedback_list|length == 0 %}
+<div class="small-container cart-page" style="margin-bottom: 50px;">
+    <p style="margin: 0px 0px 40% 0px; text-align:center;">There are no comments on this product.</p>
+</div>
+{% else %}
+
+{% for comment in feedback_list reversed %}
+<div class="small-container cart-page" style="margin-bottom: 50px;">
+    <h3 style="color: #ff523b;">{{ comment.user }}</p></h3>
+    <p style="margin-bottom: 15px;">
+        <div class="rating">
+            {% if comment.rating == 1 %}
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star-o" ></i>
+             <i class="fa fa-star-o" ></i>
+             <i class="fa fa-star-o" ></i>
+             <i class="fa fa-star-o" ></i>
+            {% endif %}
+            {% if comment.rating == 2 %}
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star-o" ></i>
+             <i class="fa fa-star-o" ></i>
+             <i class="fa fa-star-o" ></i>
+            {% endif %} 
+            {% if comment.rating == 3 %}
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star-o" ></i>
+             <i class="fa fa-star-o" ></i>
+            {% endif %} 
+            {% if comment.rating == 4 %}
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star-o" ></i>
+            {% endif %} 
+            {% if comment.rating == 5 %}
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+             <i class="fa fa-star" ></i>
+            {% endif %} 
+         </div>
+    </p>
+    <p>{{ comment.feedback }}</p>
+</div>
+{% endfor %}
+
+{% endif %}
+
+<div class="footer">
+    <div class="cointainer">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3> Download our App</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <div class="app-logo">
+                    <img src="./images/play-store.png" >
+                    <img src="./images/app-store.png" >
+                </div>    
             </div>
-            <hr>
-            <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
-       </div> 
-    </div>
-<!-- ------js for toggle menu------- -->
-    <script>
-        var Menuitems = document.getElementById("Menuitems");
-        Menuitems.style.maxHeight = "0px";
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px"){
-                    Menuitems.style.maxHeight="200px";
-                }
-            else
-                {
-                    Menuitems.style.maxHeight = "0px";
-                }
-        }
-    </script>
+            <div class="footer-col-2">
+                <img src="../static/images/logo-white.png" >
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
+            </div>
+            <div class="footer-col-3">
+                <h3> Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3> Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>Youtube</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="Copyright">Copyright 2022 - Bayode's Web Dev</p>
+    </div> 
+</div>
 </body>
 </html>
