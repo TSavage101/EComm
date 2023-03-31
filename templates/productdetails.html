@@ -14,32 +14,78 @@
 </head>
 <body>
     
-    <div class="container">
-        <div class="navbar">
+    <div class="container" style="padding: 0px;">
+        <div class="navbar" style="padding: 0px;">
             <div class="logo">
-                <a href="{% url 'home' %}"><img src="{% static './images/logob.png' %}" alt="Logo" width="200px"></a>
+                <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
+            </div>
+            <style>
+                .container .navbar .logo a img {
+                    width: 200px;
+                }
+                .container .navbar .searchbar {
+                    width: 100%;
+                }
+                .container .navbar .searchbar form #search {
+                    width: 85%;
+                    height: 30px;
+                    border-right: none;
+                    border-radius: 20px 0px 0px 20px;
+                    background: rgb(224, 221, 221);
+                    color: #49201b;
+                    font-size: 18px;
+                    padding-left: 10px;
+                }
+                @media (max-width: 858px) {
+                    .container .navbar .logo a img {
+                        width: 150px;
+                    }
+
+                    .container .navbar .searchbar form {
+                        width: 120%;
+                    }
+
+                    .container .navbar .searchbar form #search {
+                        width: 85%;
+                    }
+                }
+            </style>
+            <div style="width: 40%; margin: 0 1%;" class="searchbar">
+                <form action="../search/" method="POST"> {% csrf_token %}
+                <input type="search" id="search" placeholder="Search..." name="search" />
+                <button type="submit" style="
+                width: 15%;
+                float: right;
+                height: 30px;
+                border-left: none;
+                border-radius: 0px 20px 20px 0px;
+                background: rgb(224, 221, 221);
+                color: #49201b;
+                font-size: 18px;
+                "><i class="fa fa-search"></i></button>
+                </form>
             </div>
             <nav>
                 <ul id="Menuitems">
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'products' 1 %}">Products</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="../about#contact">Contact</a></li>
                     {% if request.user.username %}
-                    <li><a href="{% url 'logout' %}">{{ request.user.username }}</a></li>
+                        <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
                     {% else %}
-                    <li><a href="{% url 'auth' %}">Account</a></li>
-                    {% endif %}
+                        <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}   
                 </ul>
             </nav>
-            <a href="{% url 'cart' %}"><img src="{%     static './images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
             <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
-    </div>
+        </div>
  <!-- ------------ Single Product Details------------ --> 
-    <div class="small-container single-product">
-        <div class="row">
-            <div class="col-2">
+    <div class="small-container single-product" style="padding: 0; width: 100%;">
+        <div class="row" style="width: 100%;">
+            <div class="col-2" style="padding-right: 20px;">
                 <img src="{{ product.picture1.url }}" width="100%" style="height: 520px;" id="productImg">
                 <div class="small-img-row">
                     <div class="small-img-col">
@@ -55,41 +101,9 @@
                         <img src="{{ product.picture4.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                 </div>
-                    {% if product.rating == 1 %}
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                   {% endif %}
-                   {% if product.rating == 2 %}
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                   {% endif %} 
-                   {% if product.rating == 3 %}
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                   {% endif %} 
-                   {% if product.rating == 4 %}
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                   {% endif %} 
-                   {% if product.rating == 5 %}
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                   {% endif %} 
+                    
+                    <h1> {{ product.arating }} <i class="fa fa-star" ></i></h1>
+                
             </div>
             <div class="col-2">
                 <p><a href="{% url 'home' %}">Home </a> / <a href="{% url 'products' 1 %}">Products</a> / <a href="{% url 'productsa' product.type 1 %}">{{ product.type|title }}</a> / {{ product.name }}</p>
@@ -119,35 +133,35 @@
                 
                 {% if rated %}
                     <p>Your rating: 
-                        {% if product.rating == 1 %}
+                        {% if user_rating.rating == 1 %}
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star-o" ></i>
                         <i class="fa fa-star-o" ></i>
                         <i class="fa fa-star-o" ></i>
                         <i class="fa fa-star-o" ></i>
                        {% endif %}
-                       {% if product.rating == 2 %}
+                       {% if user_rating.rating == 2 %}
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star-o" ></i>
                         <i class="fa fa-star-o" ></i>
                         <i class="fa fa-star-o" ></i>
                        {% endif %} 
-                       {% if product.rating == 3 %}
+                       {% if user_rating.rating == 3 %}
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star-o" ></i>
                         <i class="fa fa-star-o" ></i>
                        {% endif %} 
-                       {% if product.rating == 4 %}
+                       {% if user_rating.rating == 4 %}
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star-o" ></i>
                        {% endif %} 
-                       {% if product.rating == 5 %}
+                       {% if user_rating.rating == 5 %}
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
                         <i class="fa fa-star" ></i>
@@ -164,14 +178,37 @@
                 
                 <form action="" method="POST" id="addtocart"> {% csrf_token %}
                 <input type="number" min="1" name="number" value="1"> <br><br>
-                <textarea name="feedback" style="width: 80%; height: 150px;" placeholder="Tell us what you think about this Product."></textarea><br>
                 {% if ici %}
                   <button disabled class="btn" style="border: 1px solid black; background: grey;"> Added To cart </button>
                 {% else %}
                   <button type="submit" class="btn" style="border: 1px solid black;"> Add To cart </button>
                 {% endif %}
-                
                 </form>
+                <form action="" method="POST" id="submitfeedback"> {% csrf_token %}
+                    {% if is_feedback %}
+                    <textarea name="feedback" style="width: 80%; height: 150px;" placeholder="Tell us what you think about this Product.">{{ feedbackqs.feedback }}</textarea><br>
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Edit Feedback </button>
+                    {% else %}
+                    <textarea name="feedback" style="width: 80%; height: 150px; padding: 5px;" placeholder="Tell us what you think about this Product."></textarea><br>
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Post Feedback </button><br>
+                    {% endif %}
+                </form>
+                
+                <form action="" method="POST" id="checkcomments"> {% csrf_token %}
+                    <input type="hidden" name="seecomments" />
+                    <input type="submit" value="See what others think..." style="
+                    width: 50%;
+                    background: none;
+                    border: 0;
+                    margin: 0;
+                    padding: 0px 0px 10px 0px;
+                    text-align: left;
+                    font-size: 15px;
+                    color: #ff523b;
+                    cursor: pointer;
+                    ">
+                </form>
+
                 <h3> Product Details <i class="fa fa-indent"></i> </h3>
                 <br>
                 <p>

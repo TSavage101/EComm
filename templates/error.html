@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -244,33 +245,200 @@
         }
     }
 	</style>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-	<div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <img src="../static/images/logob.png" alt="Logo" width="125px">
-                </div>
-                <nav>
-                    <ul id="Menuitems">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Products</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Contact</a></li>
-                        <li><a href="">Account</a></li>
-                    </ul>
-                </nav>
-                <img src="../static/images/cart.png" alt="cart" width="30px" height="30px">
-                <img src="../static/images/menu.png" class="menu-icon" onclick="menutoggle()">
+    <div class="container" style="padding: 0px;">
+        <div class="navbar" style="padding: 0px;">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
+            </div>
+            <style>
+                .container .navbar .logo a img {
+                    width: 200px;
+                }
+                .container .navbar .searchbar {
+                    width: 100%;
+                }
+                .container .navbar .searchbar form #search {
+                    width: 85%;
+                    height: 30px;
+                    border-right: none;
+                    border-radius: 20px 0px 0px 20px;
+                    background: rgb(224, 221, 221);
+                    color: #49201b;
+                    font-size: 18px;
+                    padding-left: 10px;
+                }
+                @media (max-width: 858px) {
+                    .container .navbar .logo a img {
+                        width: 150px;
+                    }
+
+                    .container .navbar .searchbar form {
+                        width: 120%;
+                    }
+
+                    .container .navbar .searchbar form #search {
+                        width: 85%;
+                    }
+                }
+            </style>
+            <div style="width: 40%; margin: 0 1%;" class="searchbar">
+                <form action="../search/" method="POST"> {% csrf_token %}
+                <input type="search" id="search" placeholder="Search..." name="search" />
+                <button type="submit" style="
+                width: 15%;
+                float: right;
+                height: 30px;
+                border-left: none;
+                border-radius: 0px 20px 20px 0px;
+                background: rgb(224, 221, 221);
+                color: #49201b;
+                font-size: 18px;
+                "><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <nav>
+                <ul id="Menuitems">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'products' 1 %}">Products</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="../about#contact">Contact</a></li>
+                    {% if request.user.username %}
+                        <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}   
+                </ul>
+            </nav>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
+            <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+        </div>
+        
+        <div style="box-sizing: border-box;">
+        <div class="this" style="width: 100%; text-align: center; margin-top: 20px;">
+            <style>
+                .this ul {
+                    display: inline-flex;
+                    list-style: none;
+                }
+                .this ul li {
+                    width: auto;
+                    margin: 0px 0% 0px 8.5%;
+                    padding: 0;
+                    color: #555;
+                    
+                }
+
+                @media (max-width: 858px) {
+                    .this ul li {
+                        width: auto;
+                        margin: 0px 0% 0px 4%;
+                        padding: 0;
+                        color: #555;
+                        font-size: small;
+                    }
+                }
+            </style>
+            <ul id="Menuitems" style="width: 100%;">
+                <li><a href="{% url 'productsearch' search 'all' %}">All</a></li>
+                <li><a href="{% url 'productsearch' search 'snacks' %}">Snacks</a></li>
+                <li><a href="{% url 'productsearch' search 'clothes' %}">Clothes</a></li>
+                <li><a href="{% url 'productsearch' search 'shoes' %">Shoes</a></li>
+                <li><a href="{% url 'productsearch' search 'accessories' %">Accessories</a></li>
+                <li><a href="{% url 'productsearch' search 'gadgets' %">Gadgets</a></li>
+                <li><a href="{% url 'productsearch' search 'miscellaneous' %">Miscellaneous</a></li>
+            </ul>
+            
             </div>
         </div>
-    </div>
+
+    {% if search_list|length == 0 %}
 	<div class="body">
 		<i id="cart-icon" class="fas fa-shopping-cart"></i>
 		<p>Your search is not available at the moment.</p>
 		<p>Please try again later.</p>
 	</div>
+    {% else %}
+    
+        <div class="small-container">
+            <div class="row row-2">
+                <h2>Search Results</h2>
+                <form action="" method="POST"> {% csrf_token %}
+                <select name="order" onchange='this.form.submit()'>
+                    <option value="Default" selected disabled>Sort by {{ value }}</option>
+                    <option value="Default">Default Sorting</option>
+                    <option value="Price">Sort by Price</option>
+                    <option value="Popularity">Sort by Popularity</option>
+                    <option value="Ratings">Sot by Ratings</option>
+                </select>
+            </form>
+            </div>
+     <!-- ------------ all product ------------ -->
+            <div class="row">
+                {% for item in search_list %}
+                  
+                <div class="col-4">
+                <a href="{% url 'productdetails' item.pk %}">
+                <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
+                    <h4>{{ item.name }}</h4>
+                    <div class="rating">
+                       {% if item.rating == 1 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %}
+                       {% if item.rating == 2 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if item.rating == 3 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if item.rating == 4 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                       {% endif %} 
+                       {% if item.rating == 5 %}
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                       {% endif %} 
+                    </div>
+                    
+                    <p>₦ {{ item.price }}</p>
+                    </a>
+                </div>
+    
+                {% endfor %}
+                
+            </div>
+    
+    {% endif %}
+
+
+
+
+
+
+
+
 <!-- ------------ footer ----------------- -->
 	<div class="footer">
 		<div class="cointainer">

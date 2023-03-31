@@ -28,6 +28,7 @@ class Product(models.Model):
     sales = models.IntegerField(default=0)
     details = models.TextField(default="No details on this product")
     rating = models.IntegerField(default=3)
+    arating = models.DecimalField(default=3, max_digits=2, decimal_places=1)
     amount = models.IntegerField()
     feedback = models.TextField(blank=True, null=True)
     date = models.DateTimeField(default=datetime.now)
@@ -55,6 +56,7 @@ class Number(models.Model):
 class Feedback(models.Model):
     user = models.CharField(max_length=200)
     feedback = models.TextField(default="No feedback")
+    rating = models.IntegerField(default=3)
     product = models.CharField(max_length=200)
     
     def __str__(self):

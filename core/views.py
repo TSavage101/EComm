@@ -96,22 +96,37 @@ def cart(request, *args, **kwargs):
     users_cart = Cart.objects.get(user=request.user.username)
     users_cart_items = Cart_item.objects.filter(user=request.user.username)
     
+    subtotal_price = 0
     total_price = 0
+    
     uci = []
     
     for a in users_cart_items:
         gp = Product.objects.get(name=a.product)
         uci.append((gp))
     
+    commission = 200
+    
+    il = []
+    
     for i in users_cart_items:
         get_product = Product.objects.get(name=i.product)
-        total_price += get_product.price
-        
+        subtotal_price = get_product.price
+        il.append(subtotal_price)
+    
+    stp = 0
+    
+    for price in il:
+        stp += price
+        total_price = stp + (commission * len(il))
+    
     context = {
         'users_cart': users_cart,
         'users_cart_items': users_cart_items,
         'total_price': total_price,
         'uci': uci,
+        'commission': commission,
+        'subtotal_price': subtotal_price,
     }
     
     return render(request, 'cart.html', context)
@@ -143,7 +158,13 @@ def products(request, pn, *args, **kwargs):
     try:
         final_plist = chunks[pn - 1]
     except:
-        return redirect('error')
+        context = {
+            'list': final_plist,
+            'plist': plist,
+            'value': value,
+        }
+        
+        return render(request, 'product.html', context)
     
     context = {
         'list': final_plist,
@@ -156,6 +177,9 @@ def products(request, pn, *args, **kwargs):
 def productdetails(request, pk, *args, **kwargs):
     
     if request.method == 'POST':
+        if 'seecomments' in request.POST:
+            return redirect('/comments/' + str(pk))
+        
         if request.user.username != '':
             if 'rating' in request.POST:
                 rating = request.POST.get('rating')
@@ -167,8 +191,14 @@ def productdetails(request, pk, *args, **kwargs):
                     r.rating = rating
                     r.save()
                     
+                    if Feedback.objects.filter(user=request.user.username, product=product.name).exists():
+                        f = Feedback.objects.get(user=request.user.username, product=product.name)
+                        f.rating = rating
+                        f.save()
+                    
                     rating_number = Rating.objects.filter(product=product.name).aggregate(Avg('rating'))['rating__avg']
-                    product.rating = rating_number
+                    product.arating = rating_number
+                    product.rating = round(rating_number)
                     
                     product.save()
                     
@@ -178,7 +208,8 @@ def productdetails(request, pk, *args, **kwargs):
                     new_rating.save()
                     
                     rating_number = Rating.objects.filter(product=product.name).aggregate(Avg('rating'))['rating__avg']
-                    product.rating = rating_number
+                    product.arating = rating_number
+                    product.rating = round(rating_number)
                     
                     product.save()
                     
@@ -186,7 +217,6 @@ def productdetails(request, pk, *args, **kwargs):
                 
             elif 'number' in request.POST:
                 number = request.POST['number']
-                feedback = request.POST['feedback']
                 
                 product = Product.objects.get(pk=pk)
                 
@@ -195,10 +225,6 @@ def productdetails(request, pk, *args, **kwargs):
                 else:
                     messages.info(request, 'The number entered is negative!')
                     return redirect('productdetails')
-                
-                if feedback != '':
-                    new_feedback = Feedback.objects.create(user=request.user.username, feedback=feedback, product=product.name)
-                    new_feedback.save()
                     
                 new_number.save()
                 
@@ -222,6 +248,36 @@ def productdetails(request, pk, *args, **kwargs):
                 user_cart.save()
                 
                 return redirect('../productdetails/' + str(pk))
+            elif 'feedback' in request.POST:
+                feedback = request.POST['feedback']
+                product = Product.objects.get(pk=pk)
+                
+                if Rating.objects.filter(user=request.user.username, product=product.name).exists():
+                    if Feedback.objects.filter(user=request.user.username, product=product.name):
+                        fbg = Feedback.objects.get(user=request.user.username, product=product.name)
+                        rbg = Rating.objects.get(user=request.user.username, product=product.name)
+                        
+                        if feedback != '':
+                            fbg.feedback = feedback
+                            fbg.rating = rbg.rating
+                            fbg.save()
+                        else:
+                            fbg.delete()
+                            
+                        return redirect('./' + str(pk))
+                    else:
+                        if feedback != '':
+                            gfr = Rating.objects.get(user=request.user.username, product=product.name)
+                            new_feedback = Feedback.objects.create(user=request.user.username, feedback=feedback, product=product.name, rating=gfr.rating)
+                            new_feedback.save()
+                        
+                            return redirect('./' + str(pk))
+                        else:
+                            messages.info(request, 'Please tell us what you think.')
+                            return redirect('./' + str(pk))
+                else:
+                    messages.info(request, 'Please rate this item before commenting.')
+                    return redirect('./' + str(pk))
             else:
                 messages.info(request, 'Please select rating for this product')
                 return redirect('./' + str(pk))
@@ -230,15 +286,24 @@ def productdetails(request, pk, *args, **kwargs):
             return redirect('auth')
             
     else:
+         
         product = Product.objects.get(pk=pk)
         related = Product.objects.filter(type=product.type)
         cart_items = Cart_item.objects.filter(user=request.user.username, product=product.name)
         is_rated = Rating.objects.filter(user=request.user.username, product=product.name)
+        is_feedback = Feedback.objects.filter(user=request.user.username, product=product.name)
+        feedbackqs = Feedback.objects.filter(user=request.user.username, product=product.name).first()
+        user_rating = Rating.objects.filter(user=request.user.username, product=product.name).first()
         
         if len(is_rated) == 0:
             rated = False
         else:
             rated = True
+            
+        if len(is_feedback) == 0:
+            is_feedback = False
+        else:
+            is_feedback = True
         
         if len(cart_items) == 0:
             ici = False
@@ -250,12 +315,24 @@ def productdetails(request, pk, *args, **kwargs):
             'related': related,
             'ici': ici,
             'rated': rated,
+            'is_feedback': is_feedback,
+            'feedbackqs': feedbackqs,
+            'user_rating': user_rating,
         }
         
         return render(request, 'productdetails.html', context)
 
-def error(request, *args, **kwargs):
-    return render(request, 'error.html', {})
+def search(request, *args, **kwargs):
+    if request.method == 'POST':
+        if 'search' in request.POST:
+            search = request.POST.get('search')
+            
+            if search == '':
+                return redirect('home')
+            else:
+                return redirect('../products/search_'+ str(search) +'/all')
+    else:
+        return redirect('home')
 
 def productsa(request, pn, type, *args, **kwargs):
     all_products = Product.objects.filter(type=type)
@@ -272,7 +349,7 @@ def productsa(request, pn, type, *args, **kwargs):
             all_products = Product.objects.filter(type=type).order_by('-rating')
         else:
             all_products = Product.objects.filter(type=type).order_by('-date')
-            
+        
     chunks = [all_products[x:x+16] for x in range(0, len(all_products), 16)]
     
     nop = math.ceil(len(all_products)/16)
@@ -284,7 +361,13 @@ def productsa(request, pn, type, *args, **kwargs):
     try:
         final_plist = chunks[pn - 1]
     except:
-        return redirect('error')
+        context = {
+        'plist': plist,
+        'value': value,
+        'type': type,
+        }
+        
+        return render(request, 'producta.html', context)
     
     context = {
         'list': final_plist,
@@ -306,3 +389,58 @@ def remove(request, *args, **kwargs):
         instance.delete()
         
         return redirect('cart')
+
+def comments(request, prodid, *args, **kwargs):
+    product = Product.objects.get(id=prodid)
+    feedback_list = Feedback.objects.filter(product=product.name)
+
+    context = {
+        'feedback_list': feedback_list,
+        'prodid': prodid,
+    }
+    
+    return render(request, 'comments.html', context)
+
+def productsearch(request, search, type, *args, **kwargs):
+    if type == 'all':
+        search_list = Product.objects.filter(name__icontains=search)
+        
+        value = 'Default'
+        
+        if request.method == 'POST':
+            value = request.POST['order']
+            
+            if value == 'Price':
+                search_list = Product.objects.filter(name__icontains=search).order_by('-price')
+            elif value == 'Popularity':
+                search_list = Product.objects.filter(name__icontains=search).order_by('-sales')
+            elif value == 'Ratings':
+                search_list = Product.objects.filter(name__icontains=search).order_by('-rating')
+            else:
+                search_list = Product.objects.filter(name__icontains=search)
+    else:
+        search_list = Product.objects.filter(name__icontains=search, type=type)
+        
+        value = 'Default'
+        
+        if request.method == 'POST':
+            value = request.POST['order']
+            
+            if value == 'Price':
+                search_list = Product.objects.filter(name__icontains=search, type=type).order_by('-price')
+            elif value == 'Popularity':
+                search_list = Product.objects.filter(name__icontains=search, type=type).order_by('-sales')
+            elif value == 'Ratings':
+                search_list = Product.objects.filter(name__icontains=search, type=type).order_by('-rating')
+            else:
+                search_list = Product.objects.filter(name__icontains=search, type=type)
+                
+    context = {
+        'search_list': search_list,
+        'value': value,
+        'search': search,
+        'type': type,
+    }
+    
+    return render(request, 'error.html', context)
+
