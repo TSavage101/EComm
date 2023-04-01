@@ -1,268 +1,317 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
-    <link rel="stylesheet" href="{% static './style.css' %}">
     <style>
         html {
             scroll-behavior: smooth;
         }
         /* This is the css for the head section, its sould be the same with all the other html */
-	*{
-        margin:0px;
-        padding: 0px;
-        box-sizing: border-box;
-        font-family: 'Lato', sans-serif;
-        /* font-family: 'Josefin Sans', sans-serif; */
-    }
-    .navbar{
-        display: flex;
-        align-items: center;
-        padding: 20px;
-    }
-    nav{
-        flex: 1;
-        text-align: right;
-    }
-    nav ul{
-        display: inline-block;
-        list-style-type: none;
-    }
-    nav ul li{
-        display: inline-block;
-        margin-right: 20px;
-        color: #555;
-
-    }
-    a{
-        text-decoration: none;
-        color: #555;
-    }
-    .container{
-        max-width: 1300px;
-        margin: auto;
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-    .row{
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-    .col-2{
-        flex-basis: 50%;
-        min-width: 300px;
-    }
-    .col-2 img{
-        max-width: 100%;
-        padding: 50px 0;
-    }
-    .col-2 h1{
-        font-size: 50px;
-        line-height: 60px;
-        margin: 25px 0;
-    }
-    .btn{
-        display : inline-block;
-        background: #ff523b;
-        color:#fff;
-        padding: 8px 30px;
-        margin: 30px 0;
-        border-radius: 30px;
-        transition: background 0.5s;
-    }
-    .btn:hover{
-        background:#563434 ;
-    }
-    .header .row{
-        margin-top: 70px;
-    }
-    .categories{
-        margin: 70px 0;
-    }
-    .col-3{
-        flex-basis: 30%;
-        min-width: 250px;
-        margin-bottom: 30px;
-    }
-    .col-3 img{
-        width: 100%;
-    }
-    .small-container{
-        max-width: 1080px;
-        margin: auto;
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-    .col-4{
-        flex-basis: 25%;
-        padding: 10px;
-        min-width: 200px;
-        margin-bottom: 50px;
-        transition: transform 0.5s;
-    }
-    .col-4 img{
-        width: 100%;
-    }
-    .title{
-        text-align: center;
-        margin: 0 auto 80px;
-        position: relative;
-        line-height: 60px;
-        color:#555;
-    }
-    .title::after{
-        content: '';
-        background: #ff523b;
-        width: 80px;
-        height: 5px;
-        border-radius: 5px;
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    h4{
-        color: #555;
-        font-weight: normal;
-    }
-    .col-4 p{
-        font-size: 14px;
-    }
-    .rating{
-        color:#ff523b;
-    }
-    .col-4:hover{
-        transform:translateY(-5px);
-    }
-/* -------- This is the team about section Css -----------*/
-        .team-section{
+        
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+            /* font-family: 'Josefin Sans', sans-serif; */
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        nav {
+            flex: 1;
+            text-align: right;
+        }
+        
+        nav ul {
+            display: inline-block;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+            color: #555;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #555;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: auto;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+        
+        .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        .col-2 {
+            flex-basis: 50%;
+            min-width: 300px;
+        }
+        
+        .col-2 img {
+            max-width: 100%;
+            padding: 50px 0;
+        }
+        
+        .col-2 h1 {
+            font-size: 50px;
+            line-height: 60px;
+            margin: 25px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff523b;
+            color: #fff;
+            padding: 8px 30px;
+            margin: 30px 0;
+            border-radius: 30px;
+            transition: background 0.5s;
+        }
+        
+        .btn:hover {
+            background: #563434;
+        }
+        
+        .header .row {
+            margin-top: 70px;
+        }
+        
+        .categories {
+            margin: 70px 0;
+        }
+        
+        .col-3 {
+            flex-basis: 30%;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .col-3 img {
             width: 100%;
         }
-        .team-section .container{
+        
+        .small-container {
+            max-width: 1080px;
+            margin: auto;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+        
+        .col-4 {
+            flex-basis: 25%;
+            padding: 10px;
+            min-width: 200px;
+            margin-bottom: 50px;
+            transition: transform 0.5s;
+        }
+        
+        .col-4 img {
+            width: 100%;
+        }
+        
+        .title {
+            text-align: center;
+            margin: 0 auto 80px;
+            position: relative;
+            line-height: 60px;
+            color: #555;
+        }
+        
+        .title::after {
+            content: '';
+            background: #ff523b;
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        h4 {
+            color: #555;
+            font-weight: normal;
+        }
+        
+        .col-4 p {
+            font-size: 14px;
+        }
+        
+        .rating {
+            color: #ff523b;
+        }
+        
+        .col-4:hover {
+            transform: translateY(-5px);
+        }
+        /* -------- This is the team about section Css -----------*/
+        
+        .team-section {
+            width: 100%;
+        }
+        
+        .team-section .container {
             width: 80%;
             margin: auto;
         }
-        .team-section .container .row{
+        
+        .team-section .container .row {
             width: 60%;
             margin: auto;
         }
-        .team-section .container .row .title{
+        
+        .team-section .container .row .title {
             text-align: center;
             margin-top: 50px;
         }
-        .team-section .container .row .title h1{
+        
+        .team-section .container .row .title h1 {
             font-size: 35px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #ff523b;
         }
-        .team-section .container .row .title p{
+        
+        .team-section .container .row .title p {
             font-size: 18px;
             font-family: sans-serif;
             margin: 30px 0px;
             color: rgb(100, 98, 98);
         }
-        .team-section .container .team-card{
-            width:100%;
+        
+        .team-section .container .team-card {
+            width: 100%;
             display: grid;
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
             grid-gap: 40px;
             margin-top: 50px;
         }
-        .team-section .container .team-card .card{
+        
+        .team-section .container .team-card .card {
             width: 100%;
             background-color: #fafafa;
-            display:flex;
+            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             padding: 20px;
             cursor: pointer;
         }
-        .team-section .container .team-card .card:hover{
-            background-color:#f3f3f3;
+        
+        .team-section .container .team-card .card:hover {
+            background-color: #f3f3f3;
             transition: 0.3s;
         }
-        .team-section .container .team-card .card .image-section img{
+        
+        .team-section .container .team-card .card .image-section img {
             height: 150px;
             width: 150px;
             border-radius: 50%;
             border: 6px solid #fff;
         }
-        .team-section .container .team-card .card .content{
+        
+        .team-section .container .team-card .card .content {
             width: 100%;
             text-align: center;
         }
-        .team-section .container .team-card .card .content h3{
+        
+        .team-section .container .team-card .card .content h3 {
             font-size: 27px;
             margin-top: 10px;
             letter-spacing: 1.5px;
             color: #639ab8;
         }
-        .team-section .container .team-card .card .content h4{
+        
+        .team-section .container .team-card .card .content h4 {
             font-size: 17px;
             margin-top: 10px;
             letter-spacing: 1.5px;
             color: #6e6e6e;
         }
-        .team-section .container .team-card .card .content p{
+        
+        .team-section .container .team-card .card .content p {
             font-size: 15px;
             margin: 16px 0px;
             line-height: 1.5;
             color: #6c6c6c;
         }
+        
         @media screen and (max-width: 900px) {
-            .team-section .container .team-card{
-                grid-template-columns: repeat(2,1fr);
+            .team-section .container .team-card {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
+        
         @media screen and (max-width: 768px) {
-            .team-section .container .team-card{
+            .team-section .container .team-card {
                 grid-template-columns: 1fr;
             }
         }
         /* Contact Form css Please don't fuck it up. */
-        section{
+        
+        section {
             padding: 40px 15%;
         }
-        .contact{
+        
+        .contact {
             background: #fff;
             height: 100%;
             width: 100%;
             min-height: 150vh;
             display: grid;
-            grid-template-columns: repeat(2,2fr);
+            grid-template-columns: repeat(2, 2fr);
             align-items: center;
             grid-gap: 6rem;
         }
-        .contact-img img{
+        
+        .contact-img img {
             max-width: 100%;
             width: 720px;
             height: auto;
             border-radius: 10px;
         }
-        .contact-form h1{
+        
+        .contact-form h1 {
             font-size: 80px;
             color: #ff523b;
             margin-bottom: 20px;
         }
-        .contact-form p{
+        
+        .contact-form p {
             color: #c6c9d8bf;
             letter-spacing: 1px;
             line-height: 26px;
             font-size: 1.1rem;
             margin-bottom: 3.8rem;
         }
-        .contact-form form{
+        
+        .contact-form form {
             position: relative;
         }
-        .contact-form form input, form textarea{
+        
+        .contact-form form input,
+        form textarea {
             width: 100%;
             padding: 17px;
             border: none;
@@ -273,12 +322,13 @@
             margin-bottom: 0.7rem;
             border-radius: 10px;
         }
-        .contact-form textarea{
-
+        
+        .contact-form textarea {
             resize: none;
             height: 200px;
         }
-        .contact-form form .btn{
+        
+        .contact-form form .btn {
             display: inline-block;
             background: #ff523b;
             font-size: 1.1rem;
@@ -291,129 +341,152 @@
             transition: ease .20s;
             cursor: pointer;
         }
-        .contact-form form .btn:hover{
+        
+        .contact-form form .btn:hover {
             border: 2px solid #ff523b;
             background: transparent;
             transform: scale(1.1);
             color: #000;
         }
+        
         @media (max-width:1570px) {
-            section{
-                padding:80px;
+            section {
+                padding: 80px;
                 transition: .2s;
             }
-            .contact-form h1{
+            .contact-form h1 {
                 font-size: 60px;
             }
-            .contact-form p{
+            .contact-form p {
                 margin-bottom: 3rem;
             }
         }
+        
         @media (max-width:1090px) {
-            .contact{
-                grid-gap:2rem;
+            .contact {
+                grid-gap: 2rem;
                 transition: .3s;
             }
         }
+        
         @media (max-width:1000px) {
-            .contact{
+            .contact {
                 grid-template-columns: 1fr;
             }
-            .contact-img img{
+            .contact-img img {
                 display: none;
             }
         }
-/* Footter Css */
-	/* -- ------------ footer ----------------- -- */
-    .footer{
-        background: #000;
-        color: #8a8a8a;
-        font-size: 14px;
-        padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 10px;
-    }
-    .footer p{
-        color: #8a8a8a;
-    }
-    .footer h3{
-        color:#fff;
-        margin-bottom: 20px;
-    }
-    .footer-col-1,.footer-col-2,.footer-col-3,.footer-col-4{
-        min-width: 250px;
-        margin-bottom: 20px;
-    }
-    .footer-col-1{
-        flex-basis: 30%;
-    }
-    .footer-col-2{
-        flex: 1;
-        text-align: center;
-    }
-    .footer-col-2 img{
-        width: 180px;
-        margin-bottom: 20px;
-    }
-    .footer-col-3, .footer-col-4{
-        flex-basis: 12%;
-        text-align: center;
-    }
-    ul{
-        list-style-type:none;
-    }
-    .app-logo{
-        margin-top: 20px;
-    }
-    .app-logo img{
-        width: 140px;
-    }
-    .footer hr{
-        border: none;
-        background: #b5b5b5;
-        height: 1px;
-        margin: 20px 0;
-    }
-    .Copyright{
-        text-align: center;
-    }
-    .menu-icon{
-        width: 28px;
-        margin-left: 20px;
-        display:none;
-    }
-    /* --------------media query for menu------------- */
-    @media only screen and (max-width: 800px){
-        nav ul{
-            position: absolute;
-            top: 70px;
-            left: 0;
-            background: #333;
-            width: 100%;
-            overflow: hidden;
-            transition: max-height 0.5s;
-        }
-        nav ul li{
-            display: block;
-            margin-right:50px;
-            margin-bottom: 10px;
-            margin-top:10px;
-        }
-        nav ul li a{
-            color: white;
-        }
-        .menu-icon{
-            display: block;
-            cursor: pointer;
-        }
-    }
+        /* Footter Css */
+        /* -- ------------ footer ----------------- -- */
         
-
+        .footer {
+            background: #000;
+            color: #8a8a8a;
+            font-size: 14px;
+            padding-top: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .footer p {
+            color: #8a8a8a;
+        }
+        
+        .footer h3 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col-1,
+        .footer-col-2,
+        .footer-col-3,
+        .footer-col-4 {
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col-1 {
+            flex-basis: 30%;
+        }
+        
+        .footer-col-2 {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .footer-col-2 img {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col-3,
+        .footer-col-4 {
+            flex-basis: 12%;
+            text-align: center;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        .app-logo {
+            margin-top: 20px;
+        }
+        
+        .app-logo img {
+            width: 140px;
+        }
+        
+        .footer hr {
+            border: none;
+            background: #b5b5b5;
+            height: 1px;
+            margin: 20px 0;
+        }
+        
+        .Copyright {
+            text-align: center;
+        }
+        
+        .menu-icon {
+            width: 28px;
+            margin-left: 20px;
+            display: none;
+        }
+        /* --------------media query for menu------------- */
+        
+        @media only screen and (max-width: 800px) {
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: #333;
+                width: 100%;
+                overflow: hidden;
+                transition: max-height 0.5s;
+            }
+            nav ul li {
+                display: block;
+                margin-right: 50px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+            nav ul li a {
+                color: white;
+            }
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+            }
+        }
     </style>
+    <link rel="stylesheet" href="{% static './style.css' %}">
 </head>
+
 <body>
-    <div class="container" style="padding: 0px;">
+    <div class="container">
         <div class="navbar" style="padding: 0px;">
             <div class="logo">
                 <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
@@ -422,44 +495,58 @@
                 .container .navbar .logo a img {
                     width: 200px;
                 }
+                
                 .container .navbar .searchbar {
                     width: 100%;
                 }
+                
+                .container .navbar .logo a img {
+                    width: 100;
+                }
+                
                 .container .navbar .searchbar form #search {
                     width: 85%;
                     height: 30px;
                     border-right: none;
                     border-radius: 20px 0px 0px 20px;
-                    background: rgb(224, 221, 221);
-                    color: #49201b;
+                    background: white;
+                    color: black;
+                    border: 2px solid black;
                     font-size: 18px;
                     padding-left: 10px;
+                    border-right: 0px;
                 }
+                
+                .container .navbar .searchbar form #sbtn {
+                    width: 15%;
+                }
+                
                 @media (max-width: 858px) {
                     .container .navbar .logo a img {
-                        width: 150px;
+                        width: 125px;
                     }
-
                     .container .navbar .searchbar form {
                         width: 120%;
                     }
-
                     .container .navbar .searchbar form #search {
-                        width: 85%;
+                        width: 75%;
+                    }
+                    .container .navbar .searchbar form #sbtn {
+                        width: 25%;
                     }
                 }
             </style>
-            <div style="width: 40%; margin: 0 1%;" class="searchbar">
+            <div style="width: 32%; margin: 0 1%;" class="searchbar">
                 <form action="../search/" method="POST"> {% csrf_token %}
-                <input type="search" id="search" placeholder="Search..." name="search" />
-                <button type="submit" style="
-                width: 15%;
+                    <input type="search" id="search" placeholder="Search..." name="search" />
+                    <button id="sbtn" type="submit" style="
                 float: right;
                 height: 30px;
+                border: 2px solid black;
                 border-left: none;
                 border-radius: 0px 20px 20px 0px;
-                background: rgb(224, 221, 221);
-                color: #49201b;
+                background: white;
+                color: black;
                 font-size: 18px;
                 "><i class="fa fa-search"></i></button>
                 </form>
@@ -471,17 +558,17 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="../about#contact">Contact</a></li>
                     {% if request.user.username %}
-                        <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
                     {% else %}
-                        <li><a href="{% url 'auth' %}">Account</a></li>
-                    {% endif %}   
+                    <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
             <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
-        </div>
-        
+    </div>
+
 
     <div class="team-section">
         <div class="container">
@@ -491,38 +578,38 @@
                     <p>This skilled team of web developers collaborates to craft innovative digital solutions, delivering exceptional user experiences and impactful online presence </p>
                 </div>
             </div>
-                <div class="team-card">
-                    <div class="card">
-                        <div class="image-section">
-                            <img src="../static/images/product-1.jpg" alt="Picture of Ayokunle">
-                        </div>
-                        <div class="content">
-                            <h3>Ositade Ayokunle</h3>
-                            <h4>Web Developer</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
+            <div class="team-card">
+                <div class="card">
+                    <div class="image-section">
+                        <img src="../static/images/product-1.jpg" alt="Picture of Ayokunle">
                     </div>
-                    <div class="card">
-                        <div class="image-section">
-                            <img src="../static/images/user-2.png" alt="Picture of Bayode">
-                        </div>
-                        <div class="content">
-                            <h3>Bayode Iretoomiwa</h3>
-                            <h4>Web Developer</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="image-section">
-                            <img src="../static/images/product-3.jpg" alt="Picture of Omaga">
-                        </div>
-                        <div class="content">
-                            <h3>Omaga David Owoichio</h3>
-                            <h4>Web Designer</h4>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        </div>
+                    <div class="content">
+                        <h3>Ositade Ayokunle</h3>
+                        <h4>Web Developer</h4>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="image-section">
+                        <img src="../static/images/user-2.png" alt="Picture of Bayode">
+                    </div>
+                    <div class="content">
+                        <h3>Bayode Iretoomiwa</h3>
+                        <h4>Web Developer</h4>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image-section">
+                        <img src="../static/images/product-3.jpg" alt="Picture of Omaga">
+                    </div>
+                    <div class="content">
+                        <h3>Omaga David Owoichio</h3>
+                        <h4>Web Designer</h4>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Contact Form -->
@@ -543,60 +630,60 @@
         </div>
     </section>
 
-<!-- ------------ footer ----------------- -->
-<div class="footer">
-    <div class="cointainer">
-        <div class="row">
-            <div class="footer-col-1">
-                <h3> Download our App</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <div class="app-logo">
-                    <img src="./images/play-store.png" >
-                    <img src="./images/app-store.png" >
-                </div>    
+    <!-- ------------ footer ----------------- -->
+    <div class="footer">
+        <div class="cointainer">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3> Download our App</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <div class="app-logo">
+                        <img src="./images/play-store.png">
+                        <img src="./images/app-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="../static/images/logo-white.png">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3> Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3> Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-col-2">
-                <img src="../static/images/logo-white.png" >
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
-            </div>
-            <div class="footer-col-3">
-                <h3> Useful Links</h3>
-                <ul>
-                    <li>Coupons</li>
-                    <li>Blog Post</li>
-                    <li>Return Policy</li>
-                    <li>Join Affliate</li>
-                </ul>
-            </div>
-            <div class="footer-col-4">
-                <h3> Follow Us</h3>
-                <ul>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
-                    <li>Instagram</li>
-                    <li>Youtube</li>
-                </ul>
-            </div>
+            <hr>
+            <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
         </div>
-        <hr>
-        <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
-    </div> 
-</div>
+    </div>
 </body>
 <!-- ------js for toggle menu------- -->
 <script>
     var Menuitems = document.getElementById("Menuitems");
     Menuitems.style.maxHeight = "0px";
-    function menutoggle(){
-        if(Menuitems.style.maxHeight == "0px"){
-                Menuitems.style.maxHeight="200px";
-            }
-        else
-            {
-                Menuitems.style.maxHeight = "0px";
-            }
+
+    function menutoggle() {
+        if (Menuitems.style.maxHeight == "0px") {
+            Menuitems.style.maxHeight = "200px";
+        } else {
+            Menuitems.style.maxHeight = "0px";
+        }
     }
 </script>
 
 </body>
+
 </html>

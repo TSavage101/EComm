@@ -1,7 +1,7 @@
-{% load static %}
-{% load  %}
+{% load static %} {% load %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title> All Product | Pick Me Up Shine On </title>
 </head>
+
 <body>
-    
-    <div class="container" style="padding: 0px;">
+
+    <div class="container">
         <div class="navbar" style="padding: 0px;">
             <div class="logo">
                 <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
@@ -24,44 +25,58 @@
                 .container .navbar .logo a img {
                     width: 200px;
                 }
+                
                 .container .navbar .searchbar {
                     width: 100%;
                 }
+                
+                .container .navbar .logo a img {
+                    width: 100;
+                }
+                
                 .container .navbar .searchbar form #search {
                     width: 85%;
                     height: 30px;
                     border-right: none;
                     border-radius: 20px 0px 0px 20px;
-                    background: rgb(224, 221, 221);
-                    color: #49201b;
+                    background: white;
+                    color: black;
+                    border: 2px solid black;
                     font-size: 18px;
                     padding-left: 10px;
+                    border-right: 0px;
                 }
+                
+                .container .navbar .searchbar form #sbtn {
+                    width: 15%;
+                }
+                
                 @media (max-width: 858px) {
                     .container .navbar .logo a img {
-                        width: 150px;
+                        width: 125px;
                     }
-
                     .container .navbar .searchbar form {
                         width: 120%;
                     }
-
                     .container .navbar .searchbar form #search {
-                        width: 85%;
+                        width: 75%;
+                    }
+                    .container .navbar .searchbar form #sbtn {
+                        width: 25%;
                     }
                 }
             </style>
-            <div style="width: 40%; margin: 0 1%;" class="searchbar">
+            <div style="width: 32%; margin: 0 1%;" class="searchbar">
                 <form action="../search/" method="POST"> {% csrf_token %}
-                <input type="search" id="search" placeholder="Search..." name="search" />
-                <button type="submit" style="
-                width: 15%;
+                    <input type="search" id="search" placeholder="Search..." name="search" />
+                    <button id="sbtn" type="submit" style="
                 float: right;
                 height: 30px;
+                border: 2px solid black;
                 border-left: none;
                 border-radius: 0px 20px 20px 0px;
-                background: rgb(224, 221, 221);
-                color: #49201b;
+                background: white;
+                color: black;
                 font-size: 18px;
                 "><i class="fa fa-search"></i></button>
                 </form>
@@ -73,19 +88,19 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="../about#contact">Contact</a></li>
                     {% if request.user.username %}
-                        <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
                     {% else %}
-                        <li><a href="{% url 'auth' %}">Account</a></li>
-                    {% endif %}   
+                    <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
             <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
-        </div>
-    
+    </div>
 
-<!-- ------------ Cart Items Details ----------------- -->
+
+    <!-- ------------ Cart Items Details ----------------- -->
     <div class="small-container cart-page">
         {% if uci|length == 0 %}
         <p style="margin: 0px 0px 40% 0px; text-align:center;">You have no products in your cart.</p>
@@ -93,6 +108,7 @@
         <table>
             <tr>
                 <th>Product</th>
+                <th>Number</th>
                 <th>Commission</th>
                 <th>Subtotal</th>
             </tr>
@@ -108,8 +124,9 @@
                         </div>
                     </div>
                 </td>
-                <td>₦ {{ commission}}</td> 
-                <td>₦ {{ item.price }} + {{ commission }}</td>
+                <td><input type="number" min="1" value="{{ item.number }}" /></td>
+                <td>₦ {{ item.commission }}</td>
+                <td>₦ {{ item.price }} + {{ item.commission }}</td>
             </tr>
             {% endfor %}
         </table>
@@ -123,20 +140,20 @@
         </div>
     </div>
     {% endif %}
-<!-- ------------ footer ----------------- -->
+    <!-- ------------ footer ----------------- -->
     <div class="footer">
-       <div class="cointainer">
+        <div class="cointainer">
             <div class="row">
                 <div class="footer-col-1">
                     <h3> Download our App</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     <div class="app-logo">
-                        <img src="{% static './images/play-store.png' %}" >
-                        <img src="{% static './images/app-store.png' %}" >
-                    </div>    
+                        <img src="{% static './images/play-store.png' %}">
+                        <img src="{% static './images/app-store.png' %}">
+                    </div>
                 </div>
                 <div class="footer-col-2">
-                    <img src="{% static './images/logo-white.png' %}" >
+                    <img src="{% static './images/logo-white.png' %}">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
                 </div>
                 <div class="footer-col-3">
@@ -160,21 +177,21 @@
             </div>
             <hr>
             <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
-       </div> 
+        </div>
     </div>
-<!-- ------js for toggle menu------- -->
+    <!-- ------js for toggle menu------- -->
     <script>
         var Menuitems = document.getElementById("Menuitems");
         Menuitems.style.maxHeight = "0px";
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px"){
-                    Menuitems.style.maxHeight="200px";
-                }
-            else
-                {
-                    Menuitems.style.maxHeight = "0px";
-                }
+
+        function menutoggle() {
+            if (Menuitems.style.maxHeight == "0px") {
+                Menuitems.style.maxHeight = "200px";
+            } else {
+                Menuitems.style.maxHeight = "0px";
+            }
         }
     </script>
 </body>
+
 </html>

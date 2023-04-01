@@ -1,254 +1,305 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Page Not Available</title>
-	<style>
-	/* This is the css for the head section, its sould be the same with all the other html */
-	*{
-        margin:0px;
-        padding: 0px;
-        box-sizing: border-box;
-        font-family: 'Lato', sans-serif;
-        /* font-family: 'Josefin Sans', sans-serif; */
-    }
-    .navbar{
-        display: flex;
-        align-items: center;
-        padding: 20px;
-    }
-    nav{
-        flex: 1;
-        text-align: right;
-    }
-    nav ul{
-        display: inline-block;
-        list-style-type: none;
-    }
-    nav ul li{
-        display: inline-block;
-        margin-right: 20px;
-        color: #555;
 
-    }
-    a{
-        text-decoration: none;
-        color: #555;
-    }
-    .container{
-        max-width: 1300px;
-        margin: auto;
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-    .row{
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-    .col-2{
-        flex-basis: 50%;
-        min-width: 300px;
-    }
-    .col-2 img{
-        max-width: 100%;
-        padding: 50px 0;
-    }
-    .col-2 h1{
-        font-size: 50px;
-        line-height: 60px;
-        margin: 25px 0;
-    }
-    .btn{
-        display : inline-block;
-        background: #ff523b;
-        color:#fff;
-        padding: 8px 30px;
-        margin: 30px 0;
-        border-radius: 30px;
-        transition: background 0.5s;
-    }
-    .btn:hover{
-        background:#563434 ;
-    }
-    .header .row{
-        margin-top: 70px;
-    }
-    .categories{
-        margin: 70px 0;
-    }
-    .col-3{
-        flex-basis: 30%;
-        min-width: 250px;
-        margin-bottom: 30px;
-    }
-    .col-3 img{
-        width: 100%;
-    }
-    .small-container{
-        max-width: 1080px;
-        margin: auto;
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-    .col-4{
-        flex-basis: 25%;
-        padding: 10px;
-        min-width: 200px;
-        margin-bottom: 50px;
-        transition: transform 0.5s;
-    }
-    .col-4 img{
-        width: 100%;
-    }
-    .title{
-        text-align: center;
-        margin: 0 auto 80px;
-        position: relative;
-        line-height: 60px;
-        color:#555;
-    }
-    .title::after{
-        content: '';
-        background: #ff523b;
-        width: 80px;
-        height: 5px;
-        border-radius: 5px;
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    h4{
-        color: #555;
-        font-weight: normal;
-    }
-    .col-4 p{
-        font-size: 14px;
-    }
-    .rating{
-        color:#ff523b;
-    }
-    .col-4:hover{
-        transform:translateY(-5px);
-    }
-/* Body css for error page */
-	.body {
-		background-color: #fff;
-		font-size: 40px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		height: 80vh;
-	}
-	
-	#cart-icon {
-		font-size: 60px;
-		margin-bottom: 20px;
-	}
-	
-	@keyframes rotate {
-		from { transform: rotate(0deg); }
-		to { transform: rotate(360deg); }
-	}
-	
-	.animated {
-		animation-name: rotate;
-		animation-duration: 1s;
-		animation-timing-function: linear;
-		animation-iteration-count: infinite;
-	}
-	/* -- ------------ footer ----------------- -- */
-    .footer{
-        background: #000;
-        color: #8a8a8a;
-        font-size: 14px;
-        padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 10px;
-    }
-    .footer p{
-        color: #8a8a8a;
-    }
-    .footer h3{
-        color:#fff;
-        margin-bottom: 20px;
-    }
-    .footer-col-1,.footer-col-2,.footer-col-3,.footer-col-4{
-        min-width: 250px;
-        margin-bottom: 20px;
-    }
-    .footer-col-1{
-        flex-basis: 30%;
-    }
-    .footer-col-2{
-        flex: 1;
-        text-align: center;
-    }
-    .footer-col-2 img{
-        width: 180px;
-        margin-bottom: 20px;
-    }
-    .footer-col-3, .footer-col-4{
-        flex-basis: 12%;
-        text-align: center;
-    }
-    ul{
-        list-style-type:none;
-    }
-    .app-logo{
-        margin-top: 20px;
-    }
-    .app-logo img{
-        width: 140px;
-    }
-    .footer hr{
-        border: none;
-        background: #b5b5b5;
-        height: 1px;
-        margin: 20px 0;
-    }
-    .Copyright{
-        text-align: center;
-    }
-    .menu-icon{
-        width: 28px;
-        margin-left: 20px;
-        display:none;
-    }
-    /* --------------media query for menu------------- */
-    @media only screen and (max-width: 800px){
-        nav ul{
-            position: absolute;
-            top: 70px;
-            left: 0;
-            background: #333;
+<head>
+    <title>Page Not Available</title>
+    <style>
+        /* This is the css for the head section, its sould be the same with all the other html */
+        
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+            /* font-family: 'Josefin Sans', sans-serif; */
+        }
+        
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        nav {
+            flex: 1;
+            text-align: right;
+        }
+        
+        nav ul {
+            display: inline-block;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+            color: #555;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #555;
+        }
+        
+        .container {
+            max-width: 1300px;
+            margin: auto;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+        
+        .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        .col-2 {
+            flex-basis: 50%;
+            min-width: 300px;
+        }
+        
+        .col-2 img {
+            max-width: 100%;
+            padding: 50px 0;
+        }
+        
+        .col-2 h1 {
+            font-size: 50px;
+            line-height: 60px;
+            margin: 25px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff523b;
+            color: #fff;
+            padding: 8px 30px;
+            margin: 30px 0;
+            border-radius: 30px;
+            transition: background 0.5s;
+        }
+        
+        .btn:hover {
+            background: #563434;
+        }
+        
+        .header .row {
+            margin-top: 70px;
+        }
+        
+        .categories {
+            margin: 70px 0;
+        }
+        
+        .col-3 {
+            flex-basis: 30%;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .col-3 img {
             width: 100%;
-            overflow: hidden;
-            transition: max-height 0.5s;
         }
-        nav ul li{
-            display: block;
-            margin-right:50px;
-            margin-bottom: 10px;
-            margin-top:10px;
+        
+        .small-container {
+            max-width: 1080px;
+            margin: auto;
+            padding-left: 25px;
+            padding-right: 25px;
         }
-        nav ul li a{
-            color: white;
+        
+        .col-4 {
+            flex-basis: 25%;
+            padding: 10px;
+            min-width: 200px;
+            margin-bottom: 50px;
+            transition: transform 0.5s;
         }
-        .menu-icon{
-            display: block;
-            cursor: pointer;
+        
+        .col-4 img {
+            width: 100%;
         }
-    }
-	</style>
+        
+        .title {
+            text-align: center;
+            margin: 0 auto 80px;
+            position: relative;
+            line-height: 60px;
+            color: #555;
+        }
+        
+        .title::after {
+            content: '';
+            background: #ff523b;
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        h4 {
+            color: #555;
+            font-weight: normal;
+        }
+        
+        .col-4 p {
+            font-size: 14px;
+        }
+        
+        .rating {
+            color: #ff523b;
+        }
+        
+        .col-4:hover {
+            transform: translateY(-5px);
+        }
+        /* Body css for error page */
+        
+        .body {
+            background-color: #fff;
+            font-size: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+        
+        #cart-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .animated {
+            animation-name: rotate;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        /* -- ------------ footer ----------------- -- */
+        
+        .footer {
+            background: #000;
+            color: #8a8a8a;
+            font-size: 14px;
+            padding-top: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+        }
+        
+        .footer p {
+            color: #8a8a8a;
+        }
+        
+        .footer h3 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col-1,
+        .footer-col-2,
+        .footer-col-3,
+        .footer-col-4 {
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col-1 {
+            flex-basis: 30%;
+        }
+        
+        .footer-col-2 {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .footer-col-2 img {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col-3,
+        .footer-col-4 {
+            flex-basis: 12%;
+            text-align: center;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        .app-logo {
+            margin-top: 20px;
+        }
+        
+        .app-logo img {
+            width: 140px;
+        }
+        
+        .footer hr {
+            border: none;
+            background: #b5b5b5;
+            height: 1px;
+            margin: 20px 0;
+        }
+        
+        .Copyright {
+            text-align: center;
+        }
+        
+        .menu-icon {
+            width: 28px;
+            margin-left: 20px;
+            display: none;
+        }
+        /* --------------media query for menu------------- */
+        
+        @media only screen and (max-width: 800px) {
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: #333;
+                width: 100%;
+                overflow: hidden;
+                transition: max-height 0.5s;
+            }
+            nav ul li {
+                display: block;
+                margin-right: 50px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+            nav ul li a {
+                color: white;
+            }
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
-    <div class="container" style="padding: 0px;">
+    <div class="container">
         <div class="navbar" style="padding: 0px;">
             <div class="logo">
                 <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
@@ -257,44 +308,58 @@
                 .container .navbar .logo a img {
                     width: 200px;
                 }
+                
                 .container .navbar .searchbar {
                     width: 100%;
                 }
+                
+                .container .navbar .logo a img {
+                    width: 100;
+                }
+                
                 .container .navbar .searchbar form #search {
                     width: 85%;
                     height: 30px;
                     border-right: none;
                     border-radius: 20px 0px 0px 20px;
-                    background: rgb(224, 221, 221);
-                    color: #49201b;
+                    background: white;
+                    color: black;
+                    border: 2px solid black;
                     font-size: 18px;
                     padding-left: 10px;
+                    border-right: 0px;
                 }
+                
+                .container .navbar .searchbar form #sbtn {
+                    width: 15%;
+                }
+                
                 @media (max-width: 858px) {
                     .container .navbar .logo a img {
-                        width: 150px;
+                        width: 125px;
                     }
-
                     .container .navbar .searchbar form {
                         width: 120%;
                     }
-
                     .container .navbar .searchbar form #search {
-                        width: 85%;
+                        width: 75%;
+                    }
+                    .container .navbar .searchbar form #sbtn {
+                        width: 25%;
                     }
                 }
             </style>
-            <div style="width: 40%; margin: 0 1%;" class="searchbar">
-                <form action="../search/" method="POST"> {% csrf_token %}
-                <input type="search" id="search" placeholder="Search..." name="search" />
-                <button type="submit" style="
-                width: 15%;
+            <div style="width: 32%; margin: 0 1%;" class="searchbar">
+                <form action="../../search/" method="POST"> {% csrf_token %}
+                    <input type="search" id="search" placeholder="Search..." name="search" />
+                    <button id="sbtn" type="submit" style="
                 float: right;
                 height: 30px;
+                border: 2px solid black;
                 border-left: none;
                 border-radius: 0px 20px 20px 0px;
-                background: rgb(224, 221, 221);
-                color: #49201b;
+                background: white;
+                color: black;
                 font-size: 18px;
                 "><i class="fa fa-search"></i></button>
                 </form>
@@ -306,32 +371,32 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="../about#contact">Contact</a></li>
                     {% if request.user.username %}
-                        <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
                     {% else %}
-                        <li><a href="{% url 'auth' %}">Account</a></li>
-                    {% endif %}   
+                    <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
             <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
-        </div>
-        
-        <div style="box-sizing: border-box;">
+    </div>
+
+    <div style="box-sizing: border-box;">
         <div class="this" style="width: 100%; text-align: center; margin-top: 20px;">
             <style>
                 .this ul {
                     display: inline-flex;
                     list-style: none;
                 }
+                
                 .this ul li {
                     width: auto;
                     margin: 0px 0% 0px 8.5%;
                     padding: 0;
                     color: #555;
-                    
                 }
-
+                
                 @media (max-width: 858px) {
                     .this ul li {
                         width: auto;
@@ -351,22 +416,22 @@
                 <li><a href="{% url 'productsearch' search 'gadgets' %">Gadgets</a></li>
                 <li><a href="{% url 'productsearch' search 'miscellaneous' %">Miscellaneous</a></li>
             </ul>
-            
-            </div>
+
         </div>
+    </div>
 
     {% if search_list|length == 0 %}
-	<div class="body">
-		<i id="cart-icon" class="fas fa-shopping-cart"></i>
-		<p>Your search is not available at the moment.</p>
-		<p>Please try again later.</p>
-	</div>
+    <div class="body">
+        <i id="cart-icon" class="fas fa-shopping-cart"></i>
+        <p>Your search is not available at the moment.</p>
+        <p>Please try again later.</p>
+    </div>
     {% else %}
-    
-        <div class="small-container">
-            <div class="row row-2">
-                <h2>Search Results</h2>
-                <form action="" method="POST"> {% csrf_token %}
+
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Search Results</h2>
+            <form action="" method="POST"> {% csrf_token %}
                 <select name="order" onchange='this.form.submit()'>
                     <option value="Default" selected disabled>Sort by {{ value }}</option>
                     <option value="Default">Default Sorting</option>
@@ -375,62 +440,53 @@
                     <option value="Ratings">Sot by Ratings</option>
                 </select>
             </form>
-            </div>
-     <!-- ------------ all product ------------ -->
-            <div class="row">
-                {% for item in search_list %}
-                  
-                <div class="col-4">
+        </div>
+        <!-- ------------ all product ------------ -->
+        <div class="row">
+            {% for item in search_list %}
+
+            <div class="col-4">
                 <a href="{% url 'productdetails' item.pk %}">
-                <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
+                    <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
                     <h4>{{ item.name }}</h4>
                     <div class="rating">
-                       {% if item.rating == 1 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %}
-                       {% if item.rating == 2 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if item.rating == 3 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if item.rating == 4 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if item.rating == 5 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                       {% endif %} 
+                        {% if item.rating == 1 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 2 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 3 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 4 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 5 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> {% endif %}
                     </div>
-                    
+
                     <p>₦ {{ item.price }}</p>
-                    </a>
-                </div>
-    
-                {% endfor %}
-                
+                </a>
             </div>
-    
-    {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
 
 
 
@@ -439,60 +495,60 @@
 
 
 
-<!-- ------------ footer ----------------- -->
-	<div class="footer">
-		<div class="cointainer">
-			<div class="row">
-				<div class="footer-col-1">
-					<h3> Download our App</h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-					<div class="app-logo">
-						<img src="./images/play-store.png" >
-						<img src="./images/app-store.png" >
-					</div>    
-				</div>
-				<div class="footer-col-2">
-					<img src="../static/images/logo-white.png" >
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
-				</div>
-				<div class="footer-col-3">
-					<h3> Useful Links</h3>
-					<ul>
-						<li>Coupons</li>
-						<li>Blog Post</li>
-						<li>Return Policy</li>
-						<li>Join Affliate</li>
-					</ul>
-				</div>
-				<div class="footer-col-4">
-					<h3> Follow Us</h3>
-					<ul>
-						<li>Facebook</li>
-						<li>Twitter</li>
-						<li>Instagram</li>
-						<li>Youtube</li>
-					</ul>
-				</div>
-			</div>
-			<hr>
-			<p class="Copyright">Copyright 2022 - Adams Web Dev</p>
-		</div> 
-	</div>
-<!-- ------js for toggle menu------- -->
-    <script>
-		document.querySelector('#cart-icon').classList.add('animated');
-        var Menuitems = document.getElementById("Menuitems");
-        Menuitems.style.maxHeight = "0px";
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px"){
-                    Menuitems.style.maxHeight="200px";
-                }
-            else
-                {
+        <!-- ------------ footer ----------------- -->
+        <div class="footer">
+            <div class="cointainer">
+                <div class="row">
+                    <div class="footer-col-1">
+                        <h3> Download our App</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="app-logo">
+                            <img src="./images/play-store.png">
+                            <img src="./images/app-store.png">
+                        </div>
+                    </div>
+                    <div class="footer-col-2">
+                        <img src="../static/images/logo-white.png">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
+                    </div>
+                    <div class="footer-col-3">
+                        <h3> Useful Links</h3>
+                        <ul>
+                            <li>Coupons</li>
+                            <li>Blog Post</li>
+                            <li>Return Policy</li>
+                            <li>Join Affliate</li>
+                        </ul>
+                    </div>
+                    <div class="footer-col-4">
+                        <h3> Follow Us</h3>
+                        <ul>
+                            <li>Facebook</li>
+                            <li>Twitter</li>
+                            <li>Instagram</li>
+                            <li>Youtube</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
+            </div>
+        </div>
+        <!-- ------js for toggle menu------- -->
+        <script>
+            document.querySelector('#cart-icon').classList.add('animated');
+            var Menuitems = document.getElementById("Menuitems");
+            Menuitems.style.maxHeight = "0px";
+
+            function menutoggle() {
+                if (Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
                     Menuitems.style.maxHeight = "0px";
                 }
-        }
-    </script>
-    <script src="https://kit.fontawesome.com/1401ab8939.js" crossorigin="anonymous"></script>
+            }
+        </script>
+        <script src="https://kit.fontawesome.com/1401ab8939.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
