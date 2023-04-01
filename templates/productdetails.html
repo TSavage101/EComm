@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +13,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title> All Product | Hebron Stores </title>
 </head>
+
 <body>
-    
-    <div class="container" style="padding: 0px;">
+
+    <div class="container">
         <div class="navbar" style="padding: 0px;">
             <div class="logo">
                 <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
@@ -23,44 +25,58 @@
                 .container .navbar .logo a img {
                     width: 200px;
                 }
+                
                 .container .navbar .searchbar {
                     width: 100%;
                 }
+                
+                .container .navbar .logo a img {
+                    width: 100;
+                }
+                
                 .container .navbar .searchbar form #search {
                     width: 85%;
                     height: 30px;
                     border-right: none;
                     border-radius: 20px 0px 0px 20px;
-                    background: rgb(224, 221, 221);
-                    color: #49201b;
+                    background: white;
+                    color: black;
+                    border: 2px solid black;
                     font-size: 18px;
                     padding-left: 10px;
+                    border-right: 0px;
                 }
+                
+                .container .navbar .searchbar form #sbtn {
+                    width: 15%;
+                }
+                
                 @media (max-width: 858px) {
                     .container .navbar .logo a img {
-                        width: 150px;
+                        width: 125px;
                     }
-
                     .container .navbar .searchbar form {
                         width: 120%;
                     }
-
                     .container .navbar .searchbar form #search {
-                        width: 85%;
+                        width: 75%;
+                    }
+                    .container .navbar .searchbar form #sbtn {
+                        width: 25%;
                     }
                 }
             </style>
-            <div style="width: 40%; margin: 0 1%;" class="searchbar">
-                <form action="../search/" method="POST"> {% csrf_token %}
-                <input type="search" id="search" placeholder="Search..." name="search" />
-                <button type="submit" style="
-                width: 15%;
+            <div style="width: 32%; margin: 0 1%;" class="searchbar">
+                <form action="../../search/" method="POST"> {% csrf_token %}
+                    <input type="search" id="search" placeholder="Search..." name="search" />
+                    <button id="sbtn" type="submit" style="
                 float: right;
                 height: 30px;
+                border: 2px solid black;
                 border-left: none;
                 border-radius: 0px 20px 20px 0px;
-                background: rgb(224, 221, 221);
-                color: #49201b;
+                background: white;
+                color: black;
                 font-size: 18px;
                 "><i class="fa fa-search"></i></button>
                 </form>
@@ -72,17 +88,17 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="../about#contact">Contact</a></li>
                     {% if request.user.username %}
-                        <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
                     {% else %}
-                        <li><a href="{% url 'auth' %}">Account</a></li>
-                    {% endif %}   
+                    <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
             <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
         </div>
-        </div>
- <!-- ------------ Single Product Details------------ --> 
+    </div>
+    <!-- ------------ Single Product Details------------ -->
     <div class="small-container single-product" style="padding: 0; width: 100%;">
         <div class="row" style="width: 100%;">
             <div class="col-2" style="padding-right: 20px;">
@@ -95,21 +111,21 @@
                         <img src="{{ product.picture2.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                     <div class="small-img-col">
-                        <img src="{{ product.picture3.url }}" width="100%" style="height: 120px;"  class="smallImg">
+                        <img src="{{ product.picture3.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                     <div class="small-img-col">
                         <img src="{{ product.picture4.url }}" width="100%" style="height: 120px;" class="smallImg">
                     </div>
                 </div>
-                    
-                    <h1> {{ product.arating }} <i class="fa fa-star" ></i></h1>
-                
+
+                <h1> {{ product.arating }} <i class="fa fa-star"></i></h1>
+
             </div>
             <div class="col-2">
                 <p><a href="{% url 'home' %}">Home </a> / <a href="{% url 'products' 1 %}">Products</a> / <a href="{% url 'productsa' product.type 1 %}">{{ product.type|title }}</a> / {{ product.name }}</p>
                 <h1> {{ product.name }}</h1>
                 <h4> ₦ {{ product.price }}</h4>
-                
+
                 <div>
                     <style>
                         h5 {
@@ -117,83 +133,64 @@
                         }
                     </style>
                     {% for message in messages %}
-                      <h5>{{ message }}</h5>
+                    <h5>{{ message }}</h5>
                     {% endfor %}
                 </div>
 
                 <form action="" method="POST" id="rate"> {% csrf_token %}
-                <select name="rating">
+                    <select name="rating">
                     <option value="default" selected disabled>Rate this Product</option>
                     <option value="1">1 star</option>
                     <option value="2">2 stars</option>
                     <option value="3">3 stars</option>
                     <option value="4">4 stars</option>
                     <option value="5">5 stars</option>
-                </select><br>
-                
-                {% if rated %}
-                    <p>Your rating: 
-                        {% if user_rating.rating == 1 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %}
-                       {% if user_rating.rating == 2 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if user_rating.rating == 3 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if user_rating.rating == 4 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if user_rating.rating == 5 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                       {% endif %} 
-                        </i></p>
-                    <button type="submit" class="btn" style="border: 1px solid black;"> Edit Rating </button><br>
-                {% else %}
-                    <button type="submit" class="btn" style="border: 1px solid black;"> Submit Rating </button><br>
-                {% endif %}
-                
+                </select><br> {% if rated %}
+                    <p>Your rating: {% if user_rating.rating == 1 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if user_rating.rating == 2 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if user_rating.rating == 3 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if user_rating.rating == 4 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if user_rating.rating == 5 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> {% endif %}
+                        </i>
+                    </p>
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Edit Rating </button><br> {% else %}
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Submit Rating </button><br> {% endif %}
+
                 </form>
-                
+
                 <form action="" method="POST" id="addtocart"> {% csrf_token %}
-                <input type="number" min="1" name="number" value="1"> <br><br>
-                {% if ici %}
-                  <button disabled class="btn" style="border: 1px solid black; background: grey;"> Added To cart </button>
-                {% else %}
-                  <button type="submit" class="btn" style="border: 1px solid black;"> Add To cart </button>
-                {% endif %}
+                    <input type="number" min="1" name="number" value="1"> <br><br> {% if ici %}
+                    <button disabled class="btn" style="border: 1px solid black; background: grey;"> Added To cart </button> {% else %}
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Add To cart </button> {% endif %}
                 </form>
-                <form action="" method="POST" id="submitfeedback"> {% csrf_token %}
-                    {% if is_feedback %}
+                <form action="" method="POST" id="submitfeedback"> {% csrf_token %} {% if is_feedback %}
                     <textarea name="feedback" style="width: 80%; height: 150px;" placeholder="Tell us what you think about this Product.">{{ feedbackqs.feedback }}</textarea><br>
-                    <button type="submit" class="btn" style="border: 1px solid black;"> Edit Feedback </button>
-                    {% else %}
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Edit Feedback </button> {% else %}
                     <textarea name="feedback" style="width: 80%; height: 150px; padding: 5px;" placeholder="Tell us what you think about this Product."></textarea><br>
-                    <button type="submit" class="btn" style="border: 1px solid black;"> Post Feedback </button><br>
-                    {% endif %}
+                    <button type="submit" class="btn" style="border: 1px solid black;"> Post Feedback </button><br> {% endif %}
                 </form>
-                
+
                 <form action="" method="POST" id="checkcomments"> {% csrf_token %}
                     <input type="hidden" name="seecomments" />
                     <input type="submit" value="See what others think..." style="
@@ -212,11 +209,7 @@
                 <h3> Product Details <i class="fa fa-indent"></i> </h3>
                 <br>
                 <p>
-                    <b>{{ product.seller }}</b> <br>
-                    Email: {{ product.seller_email }} <br>
-                    Telegram Number: {{ product.seller_telegram_number }} <br>
-                    Whatsapp Number: {{ product.seller_whatsapp_number }} <br> <br>
-                    {{ product.details }}
+                    <b>{{ product.seller }}</b> <br> Email: {{ product.seller_email }} <br> Telegram Number: {{ product.seller_telegram_number }} <br> Whatsapp Number: {{ product.seller_whatsapp_number }} <br> <br> {{ product.details }}
                 </p>
             </div>
         </div>
@@ -231,73 +224,62 @@
     <!-- ----------------- Products--------------- -->
     <div class="small-container">
         <div class="row">
-            {% for item in related %}
-              {% if item.name != product.name %}
-              <div class="col-4">
+            {% for item in related %} {% if item.name != product.name %}
+            <div class="col-4">
                 <a href="{% url 'productdetails' item.pk %}">
-                <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
+                    <img src="{{ item.picture1.url }}" alt="{{ item.name }}">
                     <h4>{{ item.name }}</h4>
                     <div class="rating">
-                       {% if item.rating == 1 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %}
-                       {% if item.rating == 2 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if item.rating == 3 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if item.rating == 4 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                       {% endif %} 
-                       {% if item.rating == 5 %}
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                       {% endif %} 
+                        {% if item.rating == 1 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 2 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 3 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 4 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i> {% endif %} {% if item.rating == 5 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i> {% endif %}
                     </div>
-                    
-                    <p>₦ {{ item.price }}</p>
-                    </a>
-                </div>
-              {% endif %}
-            {% endfor %}
-        </div> 
-    </div>
-    
 
-<!-- ------------ footer ----------------- -->
+                    <p>₦ {{ item.price }}</p>
+                </a>
+            </div>
+            {% endif %} {% endfor %}
+        </div>
+    </div>
+
+
+    <!-- ------------ footer ----------------- -->
     <div class="footer">
-       <div class="cointainer">
+        <div class="cointainer">
             <div class="row">
                 <div class="footer-col-1">
                     <h3> Download our App</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     <div class="app-logo">
-                        <img src="{% static './images/play-store.png' %}" >
-                        <img src="{% static './images/app-store.png' %}" >
-                    </div>    
+                        <img src="{% static './images/play-store.png' %}">
+                        <img src="{% static './images/app-store.png' %}">
+                    </div>
                 </div>
                 <div class="footer-col-2">
-                    <img src="{% static './images/logo-white.png' %}" >
+                    <img src="{% static './images/logo-white.png' %}">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br> Fugiat, minima ut. Aspernatur voluptates </p>
                 </div>
                 <div class="footer-col-3">
@@ -321,40 +303,40 @@
             </div>
             <hr>
             <p class="Copyright">Copyright 2022 - Adams Web Dev</p>
-       </div> 
+        </div>
     </div>
-<!-- ------js for toggle menu------- -->
+    <!-- ------js for toggle menu------- -->
     <script>
         var Menuitems = document.getElementById("Menuitems");
         Menuitems.style.maxHeight = "0px";
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px"){
-                    Menuitems.style.maxHeight="200px";
-                }
-            else
-                {
-                    Menuitems.style.maxHeight = "0px";
-                }
+
+        function menutoggle() {
+            if (Menuitems.style.maxHeight == "0px") {
+                Menuitems.style.maxHeight = "200px";
+            } else {
+                Menuitems.style.maxHeight = "0px";
+            }
         }
     </script>
-<!-- ------js for product gallery------- -->
+    <!-- ------js for product gallery------- -->
     <script>
         var productImg = document.getElementById("productImg");
         var smallImg = document.getElementsByClassName("smallImg");
 
-        smallImg[0].onclick = function(){
+        smallImg[0].onclick = function() {
             productImg.src = smallImg[0].src
         }
-        smallImg[1].onclick = function(){
+        smallImg[1].onclick = function() {
             productImg.src = smallImg[1].src
         }
-        smallImg[2].onclick = function(){
+        smallImg[2].onclick = function() {
             productImg.src = smallImg[2].src
         }
-        smallImg[3].onclick = function(){
+        smallImg[3].onclick = function() {
             productImg.src = smallImg[3].src
         }
     </script>
 
 </body>
+
 </html>

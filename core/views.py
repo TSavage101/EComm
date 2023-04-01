@@ -100,10 +100,18 @@ def cart(request, *args, **kwargs):
     total_price = 0
     
     uci = []
+    ucin = []
+    
+    for b in users_cart_items:
+        gpr = Product.objects.get(name=b.product)
+        gpr.commission = 0.07 * float(gpr.price)
+        gpr.save()
     
     for a in users_cart_items:
         gp = Product.objects.get(name=a.product)
+        ucinum = Number.objects.filter(user=request.user.username, product=a.product).first()
         uci.append((gp))
+        ucin.append((ucinum))
     
     commission = 200
     
@@ -111,20 +119,23 @@ def cart(request, *args, **kwargs):
     
     for i in users_cart_items:
         get_product = Product.objects.get(name=i.product)
-        subtotal_price = get_product.price
+        uci_num = Number.objects.filter(user=request.user.username, product=i.product).first()
+        subtotal_price = float(get_product.price) * float(uci_num.number)
         il.append(subtotal_price)
     
     stp = 0
     
     for price in il:
         stp += price
-        total_price = stp + (commission * len(il))
+        comm = 0.7 * float(price)
+        total_price = float(stp) + (float(comm) * len(il))
     
     context = {
         'users_cart': users_cart,
         'users_cart_items': users_cart_items,
         'total_price': total_price,
         'uci': uci,
+        'ucin': ucin,
         'commission': commission,
         'subtotal_price': subtotal_price,
     }

@@ -15,6 +15,7 @@ TYPE = (
 class Product(models.Model):
     name = models.CharField(max_length=150)
     price = models.DecimalField(decimal_places=2, max_digits=100)
+    commission = models.DecimalField(decimal_places=2, max_digits=100, default=0)
     picture1 = models.ImageField(upload_to='pics', default='cart.png')
     picture2 = models.ImageField(upload_to='pics', default='cart.png', blank=True, null=True)
     picture3 = models.ImageField(upload_to='pics', default='cart.png', blank=True, null=True)
@@ -24,6 +25,7 @@ class Product(models.Model):
     seller_email = models.EmailField(max_length=100)
     seller_telegram_number = models.CharField(max_length=12)
     seller_whatsapp_number = models.CharField(max_length=12)
+    seller_instagram_number = models.CharField(max_length=12, default="@instagram")
     type = models.CharField(max_length=20, choices=TYPE, default="miscellaneous")
     sales = models.IntegerField(default=0)
     details = models.TextField(default="No details on this product")

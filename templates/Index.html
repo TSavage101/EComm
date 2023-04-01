@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="container" style="padding: 0px;">
+        <div class="container">
             <div class="navbar" style="padding: 0px;">
                 <div class="logo">
                     <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
@@ -26,19 +26,29 @@
                     .container .navbar .searchbar {
                         width: 100%;
                     }
+                    .container .navbar .logo a img {
+                        width: 100;
+                    }
                     .container .navbar .searchbar form #search {
                         width: 85%;
                         height: 30px;
                         border-right: none;
                         border-radius: 20px 0px 0px 20px;
-                        background: rgb(224, 221, 221);
-                        color: #49201b;
+                        background: white;
+                        color: black;
+                        border: 2px solid black;
                         font-size: 18px;
                         padding-left: 10px;
+                        border-right: 0px;
                     }
+
+                    .container .navbar .searchbar form #sbtn {
+                        width: 15%;
+                    }
+                    
                     @media (max-width: 858px) {
                         .container .navbar .logo a img {
-                            width: 150px;
+                            width: 125px;
                         }
 
                         .container .navbar .searchbar form {
@@ -46,21 +56,25 @@
                         }
 
                         .container .navbar .searchbar form #search {
-                            width: 85%;
+                            width: 80%;
+                        }
+
+                        .container .navbar .searchbar form #sbtn {
+                            width: 20%;
                         }
                     }
                 </style>
-                <div style="width: 40%; margin: 0 1%;" class="searchbar">
+                <div style="width: 32%; margin: 0 1%;" class="searchbar">
                     <form action="search/" method="POST"> {% csrf_token %}
                     <input type="search" id="search" placeholder="Search..." name="search" />
-                    <button type="submit" style="
-                    width: 15%;
+                    <button id="sbtn" type="submit" style="
                     float: right;
                     height: 30px;
+                    border: 2px solid black;
                     border-left: none;
                     border-radius: 0px 20px 20px 0px;
-                    background: rgb(224, 221, 221);
-                    color: #49201b;
+                    background: white;
+                    color: black;
                     font-size: 18px;
                     "><i class="fa fa-search"></i></button>
                     </form>
@@ -85,7 +99,7 @@
             <div class="row">
                 <div class="col-2">
                     <h1>Elevate your style <br> with our trendsetting products.</h1>
-                    <p>Up your game fashion game today. <br> It's all about your style.</p>
+                    <p>Up your fashion game today. <br> It's all about your style.</p>
                     <a href="{% url 'productsa' 'clothes' 1 %}" class="btn">Shop Now &#8594;</a>
                 </div>
                 <div class="col-2">
@@ -338,7 +352,7 @@
         </div>
     </div>
 <!-- --- brands--- -->
-    <div class="brands">
+    <!-- <div class="brands">
         <div class="small-container">
             <div class="row">
                 <div class="col-5">
@@ -358,11 +372,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 <!-- ------------ footer ----------------- -->
     <div class="footer">
        <div class="cointainer">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="footer-col-1">
                     <h3> Download our App</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -393,7 +407,7 @@
                         <li>Youtube</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
             <hr>
             <p class="Copyright">Copyright 2022 - Ayokunle</p>
        </div> 

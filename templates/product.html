@@ -15,74 +15,87 @@
 <body>
     
     <div class="container">
-        <div class="container" style="padding: 0px;">
-            <div class="navbar" style="padding: 0px;">
-                <div class="logo">
-                    <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
-                </div>
-                <style>
+        <div class="navbar" style="padding: 0px;">
+            <div class="logo">
+                <a href="{% url 'home' %}"><img src="{% static 'images/logob.png' %}" alt="Logo"></a>
+            </div>
+            <style>
+                .container .navbar .logo a img {
+                    width: 200px;
+                }
+                
+                .container .navbar .searchbar {
+                    width: 100%;
+                }
+                
+                .container .navbar .logo a img {
+                    width: 100;
+                }
+                
+                .container .navbar .searchbar form #search {
+                    width: 85%;
+                    height: 30px;
+                    border-right: none;
+                    border-radius: 20px 0px 0px 20px;
+                    background: white;
+                    color: black;
+                    border: 2px solid black;
+                    font-size: 18px;
+                    padding-left: 10px;
+                    border-right: 0px;
+                }
+                
+                .container .navbar .searchbar form #sbtn {
+                    width: 15%;
+                }
+                
+                @media (max-width: 858px) {
                     .container .navbar .logo a img {
-                        width: 200px;
+                        width: 125px;
                     }
-                    .container .navbar .searchbar {
-                        width: 100%;
+                    .container .navbar .searchbar form {
+                        width: 120%;
                     }
                     .container .navbar .searchbar form #search {
-                        width: 85%;
-                        height: 30px;
-                        border-right: none;
-                        border-radius: 20px 0px 0px 20px;
-                        background: rgb(224, 221, 221);
-                        color: #49201b;
-                        font-size: 18px;
-                        padding-left: 10px;
+                        width: 75%;
                     }
-                    @media (max-width: 858px) {
-                        .container .navbar .logo a img {
-                            width: 150px;
-                        }
-    
-                        .container .navbar .searchbar form {
-                            width: 120%;
-                        }
-    
-                        .container .navbar .searchbar form #search {
-                            width: 85%;
-                        }
+                    .container .navbar .searchbar form #sbtn {
+                        width: 25%;
                     }
-                </style>
-                <div style="width: 40%; margin: 0 1%;" class="searchbar">
-                    <form action="../search/" method="POST"> {% csrf_token %}
+                }
+            </style>
+            <div style="width: 32%; margin: 0 1%;" class="searchbar">
+                <form action="../../search/" method="POST"> {% csrf_token %}
                     <input type="search" id="search" placeholder="Search..." name="search" />
-                    <button type="submit" style="
-                    width: 15%;
-                    float: right;
-                    height: 30px;
-                    border-left: none;
-                    border-radius: 0px 20px 20px 0px;
-                    background: rgb(224, 221, 221);
-                    color: #49201b;
-                    font-size: 18px;
-                    "><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-                <nav>
-                    <ul id="Menuitems">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'products' 1 %}">Products</a></li>
-                        <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="../about#contact">Contact</a></li>
-                        {% if request.user.username %}
-                            <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'auth' %}">Account</a></li>
-                        {% endif %}   
-                    </ul>
-                </nav>
-                <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
-                <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+                    <button id="sbtn" type="submit" style="
+                float: right;
+                height: 30px;
+                border: 2px solid black;
+                border-left: none;
+                border-radius: 0px 20px 20px 0px;
+                background: white;
+                color: black;
+                font-size: 18px;
+                "><i class="fa fa-search"></i></button>
+                </form>
             </div>
-            </div>
+            <nav>
+                <ul id="Menuitems">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'products' 1 %}">Products</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="../about#contact">Contact</a></li>
+                    {% if request.user.username %}
+                    <li><a href="{% url 'logout' %}"> {{ request.user.username }}</a></li>
+                    {% else %}
+                    <li><a href="{% url 'auth' %}">Account</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" alt="cart" width="30px" height="30px"></a>
+            <img src="{% static './images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
 
     <div class="this" style="width: 100%; text-align: center; margin-top: 20px;">
         <style>
